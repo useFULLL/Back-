@@ -1,5 +1,17 @@
 # Back-
 
+# DB 생성
+- start mysql
+- mysql cmd 명령어 실행
+1. (first time) create database sedb;
+2. use sedb; 
+3. create table user(
+     userID varchar(30) not null,
+     userPW varchar(30) not null,
+     userName varchar(30) not null,
+     primary key(userID)
+     );
+
 -----------------------
 # error 해결
 1. node app.js 실행 시 , mysql connection error 발생 하는 경우
