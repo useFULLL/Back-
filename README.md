@@ -1,4 +1,7 @@
 # Back-
+
+
+=======
 ----------------
 # DB 생성
 - start mysql
@@ -19,3 +22,4 @@
     * MySQL Server의 recofigure 클릭
     * authentication method 나올때까지 next 
     * authentication method 페이지에서 use legacy ~ 선택 후 저장
+
