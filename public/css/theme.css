@@ -4677,6 +4677,13 @@ section {
     color: #fa4251;
 }
 
+@media (min-width: 1200px) {
+    .table-responsive-data3 {
+        height:100px;
+        overflow: auto;
+    }
+}
+
 .table-data3 thead {
     background: #4272d7;
 }
@@ -4707,7 +4714,7 @@ section {
     text-align: right;
     padding-right: 50px;
 }
-.table-data3 tbody {
+.table-data3.table.table-borderless tbody {
     display:bolck;
     height:200px;
     overflow:auto;
