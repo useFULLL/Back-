@@ -36,6 +36,9 @@
 </head>
 
 <body class="animsition">
+    <% if(userID){ %>
+        <script> alert('이미 로그인된 상태입니다.'); window.location.href('http://localhost:3000/'); </script>
+    <% } %> 
     <div class="page-wrapper">
         <div class="page-content--bge5">
             <div class="container">

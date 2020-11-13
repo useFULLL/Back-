@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>MainPage</title>
+    <title>Dashboard</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -45,6 +45,7 @@
                 </a>
             </div>
             <div class="menu-sidebar2__content js-scrollbar1">
+                <% if(userID){ %>
                 <div class="account2">
                     <div class>
                         <img src="" alt="kyuree" />
@@ -52,6 +53,10 @@
                     <h4 class="name">Kyuree Kim</h4>
                     <a href="#">Sign out</a>
                 </div>
+                <% }else{ %>
+                    <a href="/login">Sign in</a>
+                    <a href="/register">Sign up</a>
+                <% } %>
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
@@ -432,6 +437,82 @@
                                 </div>
                             </div>
                         </div>
+                          <!--
+                        <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c1">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-account-o"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>10368</h2>
+                                                <span>members online</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart1"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c2">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-shopping-cart"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>388,688</h2>
+                                                <span>items solid</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart2"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c3">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-calendar-note"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>1,086</h2>
+                                                <span>this week</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart3"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c4">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-money"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>$1,060,386</h2>
+                                                <span>total earnings</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart4"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+
                         <div class="row">
                             <div class="col-lg">
                                 <h2 class="title-1 m-b-25">MY 모의 투자</h2>
@@ -442,55 +523,35 @@
                                                 <th>종목명</th>
                                                 <th>평가 손익</th>
                                                 <th>수익률</th>
-                                                <th class="text-left">가능 수량</th>
-                                                <th class="text-left">보유 수량</th>
-                                                <th class="text-left">매입 금액</th>
-                                                <th class="text-left">평가 금액</th>
-                                                <th class="text-left">수수료</th>
-                                                <th class="text-left">세금</th>
-                                                <th class="text-left">보유비중</th>
+                                                <th class="text-right">가능 수량</th>
+                                                <th class="text-right">보유 수량</th>
+                                                <th class="text-right">매입 금액</th>
+                                                <th class="text-right">평가 금액</th>
+                                                <th class="text-right">수수료</th>
+                                                <th class="text-right">세금</th>
+                                                <th class="text-right">보유비중</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% if(isLogin==1){%>
-                                                <% if(type=='user'){%>
-                                                    <% for(var i =0; i < user_data.length ;i++){%>
-                                                    <tr>                
-                                                        <td><%=user_data[i].userName%></td>               
-                                                        <td><%=user_data[i].userID%></td>
-                                                        <td><%=user_data[i].userPW%></td>
+                                            <tr>
+                                                <td>유비케</td>
+                                                <td>-30</td>
+                                                <td>-0.06%</td>
+                                                <td class="text-right">11</td>
+                                                <td class="text-right">11</td>
+                                                <td class="text-right">3,742</td>
+                                                <td class="text-right">3,750</td>
+                                                <td class="text-right">0</td>
+                                                <td class="text-right">140</td>
+                                                <td class="text-right">28.32%</td>
+                                            </tr>
 
-                                                        <% for(var j =0; j < 6;j++){%>
-                                                            <td class="text-left">-</td>
-                                                        <%}%>
 
-                                                    </tr>
-                                                    <%}%>
-                                                <%}else{%>
-                                                <%}%>  
-                                            <%}else{%>
-                                                <tr>
-                                                    <td class="text-left"><%=cdata.user[0].name%></td>
-                                                        <td class="text-left"><%=cdata.user[0].ID%></td>
-                                                        <td class="text-left"><%=cdata.user[0].type%></td>
-                                                        <td class="text-left"><%=cdata.user[0].balance%></td>
-
-                                                        <% for(var j =0; j < 6;j++){%>
-                                                            <td class="text-left">-</td>
-                                                        <%}%>
-                                                    <!-- <% for(var i =0; i < 10;i++){%>
-                                                        <td class="text-center">-</td>
-                                                    <%}%> -->
-                                                </tr>
-                                            <%}%>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                           </div>
-                        <form action"/getdata" method="GET">
-                            <button type ="submit"> 데이터 불러오기</button>    
-                        </form>
                         <div class="row">
                             <div class="col-lg-4">
                                 <h2 class="title-1 m-b-25">TOP 상한가 종목</h2>

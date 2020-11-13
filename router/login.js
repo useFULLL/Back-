@@ -1,3 +1,4 @@
+const { render } = require('ejs');
 var express = require('express'); 
 var router = express.Router();
 var db_config = require('../config/database');
@@ -6,7 +7,11 @@ var conn = db_config.init();
 db_config.connect(conn);
  
 router.get('/', function(req, res, next) {
-    res.render('login');
+    res.render('login',{userID: req.session.userID});
+});
+
+router.get('/fail', function(req, res, next) {
+    res.render('fail/login_fail',{title:'로그인 실패'});
 });
 
 router.post('/', function(req, res, next) {
@@ -18,10 +23,10 @@ router.post('/', function(req, res, next) {
         if(err){
             console.log('err: ' + err);
         }else{
-            if(result.length === 0){
-                //해당하는 유저를 찾을 수 없다.
+            if(result.length == 0){
+                res.redirect('/login/fail');
             }else{
-                req.session.userID = result[0].userID;
+                req.session.userID = body.email;
                 res.redirect('/');
             }
         }

@@ -6,7 +6,11 @@ var conn = db_config.init();
 db_config.connect(conn);
  
 router.get('/', function(req, res, next) {
-    res.render('register');
+    res.render('register',{userID: req.session.userID});
+});
+
+router.get('/fail', function(req, res, next) {
+    res.render('fail/register_fail',{title:'회원가입 실패'});
 });
 
 router.post('/', function(req, res, next) {
@@ -18,7 +22,7 @@ router.post('/', function(req, res, next) {
             console.log('err: ' + err);
         }else{
             if(result.length !== 0){
-                //유저가 이미 존재한다.
+                res.redirect('/register/fail');
             }else{
                 var insertSql = 'INSERT INTO user VALUES(?,?,?)';
                 var params = [body.email,body.password,body.username];
