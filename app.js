@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mainRouter = require('./router/main');
 var loginRouter = require('./router/login');
 var registerRouter = require('./router/register');
-
+var memeRouter = require('./router/meme');
 
 //뷰엔진 설정
 app.set('view engine','ejs');
@@ -27,7 +27,10 @@ app.use(session({
 app.use('/', mainRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/meme',memeRouter);
 
 app.listen(port, () => {
     console.log("Express server has started on port 3000");
 })
+
+app.locals.cdata=require('./local.json');
