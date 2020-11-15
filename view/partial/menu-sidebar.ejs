@@ -1,0 +1,82 @@
+    <div class="logo">
+        <a href="main.js">
+            <img src="images/icon/logo-white.png" alt="Cool Admin" />
+        </a>
+    </div>
+    <div class="menu-sidebar2__content js-scrollbar1">
+        <% var userID = false; // 임시
+        if(userID){%>
+        <div class="account2">
+            <div class>
+                <img src="" alt="" />
+            </div>
+                <h4 class="name"><%= user.Name %></h4>
+                <h5 ><%= user.money %>￦</h5>
+                <a href="login.js">Sign out</a>
+
+            <a href="login.js">Sign in</a>
+        </div>
+        <%} else{%>
+            <div class="account2">
+                <div class>
+                    <img src="" alt="" />
+                </div>
+                    <h4 class="name">new </h4>
+                    <a href="login.js">Sign in</a>
+            </div>
+        <%}%>
+
+        <nav class="navbar-sidebar2">
+            <ul class="list-unstyled navbar__list">
+                <li class="active has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-tachometer-alt"></i>투자 정보
+                        <span class="arrow">
+                            <i class="fas fa-angle-down"></i>
+                        </span>
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="main.js">
+                                <i class="fas fa-tachometer-alt"></i>주식</a>
+                        </li>
+                        <!-- <li>
+                            <a href="index2.html">
+                                <i class="fas fa-tachometer-alt"></i>펀드</a>
+                        </li> -->
+                    </ul>
+                </li>
+                <li class="active has-sub">
+                    <a class="js-arrow" href="#">
+                            <i class="fas fa-tachometer-alt"></i>모의 투자 대회
+                            <span class="arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </span>
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="">
+                                <i class="fas fa-tachometer-alt"></i>주식</a>
+                        <!-- </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-tachometer-alt"></i>펀드</a>
+                        </li> -->
+                    </ul>
+                </li>
+                <li class="active has-sub">
+                    <a class="js-arrow" href="#">
+                            <i class="fas fa-tachometer-alt"></i>게시판
+                            <span class="arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </span>
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="border">
+                                <i class="fas fa-tachometer-alt"></i>게시판</a>
+                        </li>
+                    </ul>
+                </li>
+        </nav>
+    </div>
