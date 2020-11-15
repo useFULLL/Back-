@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Title Page-->
+    <title>Meme</title>
+    <%- include('./partial/head'); %>
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar2">
+            <%- include('./partial/menu-sidebar'); %>
+
+            <div class="menu-sidebar2__content js-scrollbar1">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>주식</h4>
+                            </div>
+                            <div class="card-body">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">매수</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">매도</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content p-1" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="form-group">
+                                            <label for="selectSm" class=" form-control-label">종목</label>
+                                            <div>text</div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-4">
+                                                <label for="selectSm" class=" form-control-label">수량</label>
+                                            </div>
+                                            <div class="col col-md-8">
+                                                <input type='number' min='1' max='100000000'></input>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            <i class="fa fa-star"></i>&nbsp; 매수</button>
+                                    </div>
+                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="form-group">
+                                            <label for="selectSm" class=" form-control-label">종목</label>
+                                            <div>text</div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-4">
+                                                <label for="selectSm" class=" form-control-label">수량</label>
+                                            </div>
+                                            <div class="col col-md-8">
+                                                <input type="number" min="1" max="100"></input>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            <i class="fa fa-star"></i>&nbsp; 매도</button>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <%- include('./partial/header-desktop'); %>
+            <!-- END HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT   &&&&&&&&&&&& -->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                                <h3 class="title-5 m-b-25">내 투자 정보</h3>
+                                <div class="table-responsive table-responsive-data3  m-b-40">
+                                    <table class="table table-borderless table-data3">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">종목명</th>
+                                                <th class="text-left">전일비</th>
+                                                <th class="text-left">현재가</th>
+                                                <th class="text-left">수익률</th>
+                                                <th class="text-left">수익</th>
+                                                <th class="text-left">보유수량</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(var i=0; i < portfolio.length; i++){%>
+                                                <tr>
+                                                    <td><%=portfolio[i].userID%></td>
+                                                    <td>+ <%=portfolio[i].stockName%></td>
+                                                    <td><%=portfolio[i].price%>원</td>
+                                                    <td>+/-<%=portfolio[i].userID%> %</td>
+                                                    <td>+ <%=portfolio[i].stockName%>원</td>
+                                                    <td><%=portfolio[i].price%>주</td>
+                                                </tr>
+                                            <%}%>
+                                            
+<!-- 
+                                            <tr>
+                                                <td>삼성전자</td>
+                                                <td class="process">+1200</td>
+                                                <td>48750원</td>
+                                                <td>+1.8%</td>
+                                                <td>0원</td>
+                                                <td>10주</td>
+                                            </tr>
+                                            <tr>
+                                                <td>LG디스플레이</td>
+                                                <td class="denied">-450</td>
+                                                <td>10250원</td>
+                                                <td>+0.0%</td>
+                                                <td>0원</td>
+                                                <td>10주</td>
+                                            </tr>
+                                            <tr>
+                                                <td>삼성카드</td>
+                                                <td class="denied">-200</td>
+                                                <td>29300원</td>
+                                                <td>+0.0%</td>
+                                                <td>0원</td>
+                                                <td>0주</td>
+                                            </tr>
+                                            <tr>
+                                                <td>LG전자</td>
+                                                <td class="denied">-900</td>
+                                                <td>54300원</td>
+                                                <td>+0.0%</td>
+                                                <td>0원</td>
+                                                <td>0주</td>
+                                            </tr>
+                                            <tr>
+                                                <td>대한항공</td>
+                                                <td class="denied">-500</td>
+                                                <td>19600원</td>
+                                                <td>+0.0%</td>
+                                                <td>0원</td>
+                                                <td>0주</td>
+                                            </tr> -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <h3 class="title-5 m-b-25">투자 가능 주식 목록</h3>
+                                <div class="table-responsive table-responsive-data2">
+                                    <table class="table table-data2">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th>
+                                                    <label class="au-checkbox">
+                                                        <input type="checkbox">
+                                                        <span class="au-checkmark"></span>
+                                                    </label>
+                                                </th> -->
+                                                <th>선택</th>
+                                                <th>종목명</th>
+                                                <th>현재가</th>
+                                                <th>전일비</th>
+                                                <th>등락률</th>
+                                                <th>거래량</th>
+                                                <th>매수호가</th>
+                                                <th>매도호가</th>
+                                            </tr>
+                                        </thead>                                
+                                        <tbody class ="table-data">
+                                            <% for(var i=0; i < 10; i++){%>
+                                                <tr class="tr-shadow">
+                                                    <th>
+                                                        <input type="radio" id ="select_ST" name="select-ST">
+                                                        <!-- <label class="au-checkbox">
+                                                            <input type="checkbox">
+                                                            <span class="au-checkmark"></span>
+                                                        </label> -->
+                                                    </th>                                                    
+                                                    <% for(var j=0; j < 7; j++){%>
+                                                        <td>-</td>                                                       
+                                                    <%}%>
+                                                </tr>
+                                            <%}%>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <%- include('./partial/body-js.ejs') %>
+
+</body>
+
+</html>
+<!-- end document-->

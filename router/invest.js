@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
         else{
             console.log(results);
             var portfolio = results;
-            res.render('meme',{portfolio});
+            res.render('invest',{portfolio});
 
                     
         }
