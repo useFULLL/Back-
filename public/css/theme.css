@@ -2163,7 +2163,7 @@ section {
 }
 
 .account2 {
-    padding: 38px;
+    padding: 5px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -2209,7 +2209,7 @@ section {
 .menu-sidebar2__content {
     height: -webkit-calc(100vh - 75px);
     height: -moz-calc(100vh - 75px);
-    height: calc(100vh - 75px);
+    height: calc(100vh - 400px);
     border-right: 1px solid #e5e5e5;
     position: relative;
 }
