@@ -4,24 +4,112 @@
 <head>
     <!-- Title Page-->
     <title>MainPage</title>
-    <%- include('./partial/head'); %>
+    <%- include('partial/head') %>
 </head>
 
 <body class="animsition">
     <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar2">
-            <%- include('./partial/menu-sidebar'); %>
+            <%- include('partial/menu-sidebar') %>
         </aside>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
-            <%- include('./partial/header-desktop'); %>
+            <%- include('partial/header-desktop') %>
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
+
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1">대학생을 위한 투자 시스템</h2>
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                        <i class="zmdi zmdi-plus"></i>모의 투자 매매</button>
+                                </div>
+                            </div>
+                        </div>
+                          <!--
+                        <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c1">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-account-o"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>10368</h2>
+                                                <span>members online</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart1"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c2">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-shopping-cart"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>388,688</h2>
+                                                <span>items solid</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart2"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c3">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-calendar-note"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>1,086</h2>
+                                                <span>this week</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart3"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c4">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-money"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>$1,060,386</h2>
+                                                <span>total earnings</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart4"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
 
                         <div class="row">
                             <div class="col-lg">
@@ -42,39 +130,6 @@
                                                 <th class="text-right">보유비중</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <% if(userID){%>
-                                                <% if(type=='user'){%>
-                                                    <% for(var i =0; i < user_data.length ;i++){%>
-                                                    <tr>                
-                                                        <td><%=user_data[i].userName%></td>               
-                                                        <td><%=user_data[i].userID%></td>
-                                                        <td><%=user_data[i].userPW%></td>
-
-                                                        <% for(var j =0; j < 6;j++){%>
-                                                            <td class="text-left">-</td>
-                                                        <%}%>
-
-                                                    </tr>
-                                                    <%}%>
-                                                <%}else{%>
-                                                <%}%>  
-                                            <%}else{%>
-                                                <tr>
-                                                    <td class="text-left"><%=cdata.user[0].name%></td>
-                                                        <td class="text-left"><%=cdata.user[0].ID%></td>
-                                                        <td class="text-left"><%=cdata.user[0].type%></td>
-                                                        <td class="text-left"><%=cdata.user[0].balance%></td>
-
-                                                        <% for(var j =0; j < 6;j++){%>
-                                                            <td class="text-left">-</td>
-                                                        <%}%>
-                                                    <!-- <% for(var i =0; i < 10;i++){%>
-                                                        <td class="text-center">-</td>
-                                                    <%}%> -->
-                                                </tr>
-                                            <%}%>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -273,7 +328,7 @@
 
     </div>
 
-    <%- include('./partial/body-js.ejs') %>
+    <%- include('partial/body-js') %>
 
 </body>
 

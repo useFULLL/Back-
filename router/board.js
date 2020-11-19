@@ -4,8 +4,9 @@ var db_config = require('../config/database');
 var conn = db_config.init();
 db_config.connect(conn);
 
+//게시판
 router.get('/', function(req, res, next) {
-    var sql ='select B.boardID,U.userName,B.title,B.postDate from board B, user U where B.userID=U.userID order by postDate DESC';
+    var sql ='select B.boardID,B.userID,B.title,B.postDate,U.userName from board B, user U where U.userID=B.userID order by postDate DESC';
     var result;
     conn.query(sql,function(err, re){
         if(err){
@@ -14,12 +15,13 @@ router.get('/', function(req, res, next) {
             result=re;
         }
     });
-    res.render('board/board',{userID: req.session.userID, boardData: result});
+    res.render('board/board',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type, boardData: result});
 });
 
+//글
 router.get('/post', function(req, res, next) {
     var boardID = req.params.id;
-    var sql ='select U.userName,B.title,B.postDate,B.description from board B, user U where B.userID=U.userID and B.boardID=?';
+    var sql ='select B.boardID,B.userID,B.title,B.postDate,U.userName,B.description from board B, user U where U.userID=B.userID and B.boardID=?';
     conn.query(sql,boardID,function(err, re){
         if(err){
             console.log('err: ' + err);
@@ -27,14 +29,15 @@ router.get('/post', function(req, res, next) {
             result=re;
         }
     });
-    res.render('board/post',{userID: req.session.userID, postData: result});
+    res.render('board/post',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type, postData: result});
 });
 
+//글 작성
 router.get('/create', function(req, res, next) {
     if(!req.session.userID){
         res.send('<script>alert("로그인이 필요합니다."); location.href="/"</script>');
     }
-    res.render('board/create',{userID: req.session.userID});
+    res.render('board/create',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type});
 });
 
 router.post('/create', function(req, res, next) {
@@ -66,6 +69,7 @@ router.post('/create', function(req, res, next) {
     });
 });
 
+//글 삭제
 router.get('/delete', function(req, res, next) {
     if(!req.session.userID){
         res.send('<script>alert("로그인이 필요합니다."); location.href="/"</script>');
