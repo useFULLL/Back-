@@ -165,7 +165,8 @@ strong {
 .title-1 {
     text-transform: capitalize;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 20px;
+    padding-top:30px;
 }
 
 .title-2 {
@@ -278,7 +279,7 @@ section {
 .page-wrapper {
     overflow: hidden;
     background: #e5e5e5;
-    padding-bottom: 8vh;
+   /*padding-bottom: 8vh;*/
 }
 
 @media (max-width: 991px) {
@@ -486,7 +487,7 @@ section {
 }
 
 .au-btn--blue {
-    background: #4272d7;
+    background: #365cad;
 }
 
 .au-btn--green {
@@ -3104,6 +3105,8 @@ section {
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    padding-bottom: 35px;
+    place-content: flex-end;
 }
 
 @media (max-width: 767px) {
@@ -4197,8 +4200,8 @@ section {
 }
 
 .top-campaign {
-    padding-bottom: 97px;
-    margin-bottom: 40px;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 .chart-percent-2 {
@@ -4239,8 +4242,8 @@ section {
 }
 
 .table-earning thead th {
-    background: #333;
-    font-size: 16px;
+    background: #365cad;
+    font-size: 13px;
     color: #fff;
     vertical-align: middle;
     font-weight: 400;
@@ -4281,7 +4284,7 @@ section {
 
 .table-top-countries tbody td {
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 13px;
     color: #fff;
     padding: 14px 5px;
     border-top: none;
@@ -4471,7 +4474,7 @@ section {
 
 .table-top-campaign.table tr td:last-child {
     color: #4272d7;
-    text-align: right;
+    text-align: center;
 }
 
 .table-top-campaign.table tr:last-child td {
@@ -4479,6 +4482,7 @@ section {
 }
 
 @media (min-width: 1200px) {
+
     .table-responsive-data2 {
         height:350px;
         overflow: auto;
@@ -4787,6 +4791,7 @@ section {
     z-index: 0;
 }
 
+
 @media (max-width: 991px) {
     .au-breadcrumb {
         height: 130px;
@@ -4882,8 +4887,8 @@ section {
 }
 
 .au-breadcrumb2 {
-    padding-top: 48px;
-    padding-bottom: 50px;
+    padding-top: 35px;
+    padding-bottom: 35px;
 }
 
 .au-breadcrumb2 .au-breadcrumb-span {
@@ -5064,7 +5069,7 @@ section {
 
 /* ----- Statistic 2 ----- */
 .statistic2 {
-    padding-top: 50px;
+    padding-top: 35px;
 }
 
 .statistic2 .statistic__item {
