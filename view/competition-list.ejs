@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Title Page-->
+    <title>MainPage</title>
+    <%- include('./partial/head'); %>
+</head>
+
+<body class="animsition">
+    
+    <div class="page-wrapper">
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar2">
+            <%- include('./partial/menu-sidebar'); %>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <!-- <%- include('./partial/header-desktop'); %> -->
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                        <i class="zmdi zmdi-plus"></i>00모의 투자 대회 참가 버튼(신청 여부에 따라 다름)</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg">
+                                <h2 class="title-1 m-b-25">대회 목록</h2>
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class ="table table-borderless table-data3">
+                                        <thead>
+                                            <tr>
+                                                <th>대회 이름</th>
+                                                <th>투자 금액</th>
+                                                <th>대회 참여 여부</th>
+                                                <th>모집 기간</th>
+                                                <th>대회 기간</th>
+                                                <th>참여</th>                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>                                                   
+                                                <% for(var i =0; i < 5;i++){%>
+                                                    <td class="text-center">-</td>
+                                                <%}%>
+                                                <td><button>참가</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <%- include('./partial/body-js.ejs') %>
+
+</body>
+
+</html>
+<!-- end document-->
+
+
