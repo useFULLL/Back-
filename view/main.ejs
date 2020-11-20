@@ -22,251 +22,96 @@
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
-
-                        <div class="row">
-                            <div class="col-lg">
-                                <h2 class="title-1 m-b-25">MY 모의 투자</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>종목명</th>
-                                                <th>평가 손익</th>
-                                                <th>수익률</th>
-                                                <th class="text-right">가능 수량</th>
-                                                <th class="text-right">보유 수량</th>
-                                                <th class="text-right">매입 금액</th>
-                                                <th class="text-right">평가 금액</th>
-                                                <th class="text-right">수수료</th>
-                                                <th class="text-right">세금</th>
-                                                <th class="text-right">보유비중</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <% if(userID){%>
-                                                <% if(type=='user'){%>
-                                                    <% for(var i =0; i < user_data.length ;i++){%>
-                                                    <tr>                
-                                                        <td><%=user_data[i].userName%></td>               
-                                                        <td><%=user_data[i].userID%></td>
-                                                        <td><%=user_data[i].userPW%></td>
-
-                                                        <% for(var j =0; j < 6;j++){%>
-                                                            <td class="text-left">-</td>
-                                                        <%}%>
-
-                                                    </tr>
-                                                    <%}%>
-                                                <%}else{%>
-                                                <%}%>  
-                                            <%}else{%>
-                                                <tr>
-                                                    <td class="text-left"><%=cdata.user[0].name%></td>
-                                                        <td class="text-left"><%=cdata.user[0].ID%></td>
-                                                        <td class="text-left"><%=cdata.user[0].type%></td>
-                                                        <td class="text-left"><%=cdata.user[0].balance%></td>
-
-                                                        <% for(var j =0; j < 6;j++){%>
-                                                            <td class="text-left">-</td>
-                                                        <%}%>
-                                                    <!-- <% for(var i =0; i < 10;i++){%>
-                                                        <td class="text-center">-</td>
-                                                    <%}%> -->
-                                                </tr>
-                                            <%}%>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                          </div>
+ 
                         <!-- <form action"/getdata" method="GET">
                             <button type ="submit"> 데이터 불러오기</button>    
                         </form> -->
                         <div class="row">
-                            <div class="col-lg-4">
-                                <h2 class="title-1 m-b-25">TOP 상한가 종목</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>종목명</th>
-                                                <th>현재가</th>
-                                                <th>전일비</th>
-                                                <th class="text-right">등략률</th>
-                                                <th class="text-right">거래량</th>
-                                                <th class="text-right">시가</th>
-                                            </tr>
-                                        </thead>
-                                        <!-- <tbody>
-                                            <tr>
-                                                <td>보락</td>
-                                                <td>2,615</td>
-                                                <td>600</td>
-                                                <td class="text-right">+29.78%</td>
-                                                <td class="text-right">155532138</td>
-                                                <td class="text-right">2045</td>
-                                            </tr>
-                                            <tr>
-                                                <td>DB하이텍1우</td>
-                                                <td>203000</td>
-                                                <td>46500</td>
-                                                <td class="text-right">+29.71%</td>
-                                                <td class="text-right">167623</td>
-                                                <td class="text-right">166000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>현대비앤지스틸우</td>
-                                                <td>99300</td>
-                                                <td>22900</td>
-                                                <td class="text-right">+29.97%</td>
-                                                <td class="text-right">134593 </td>
-                                                <td class="text-right">75200</td>
-                                            </tr>
-                                            <tr>
-                                                <td>동부건설우</td>
-                                                <td>45550</td>
-                                                <td>10500</td>
-                                                <td class="text-right">+29.96%</td>
-                                                <td class="text-right">679739</td>
-                                                <td class="text-right">41500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>신원우</td>
-                                                <td>57200</td>
-                                                <td>13150</td>
-                                                <td class="text-right">+29.85%</td>
-                                                <td class="text-right">114576</td>
-                                                <td class="text-right">45000</td>
-                                            </tr>
-
-                                        </tbody> -->
-                                    </table>
+                            <div class="col">
+                                <div class="col-sm-12">
+                                    <h2 class="title-1 m-b-25">TOP 상한가 종목</h2>
+                                    <div class="table-responsive table--no-card m-b-40">
+                                        <table class="table table-borderless table-striped table-earning">
+                                            <thead>
+                                                <tr>
+                                                    <th>종목명</th>
+                                                    <th>현재가</th>
+                                                    <th>전일비</th>
+                                                    <th class="text-right">등략률</th>
+                                                    <th class="text-right">거래량</th>
+                                                    <th class="text-right">시가</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- <tbody>
+                                                <tr>
+                                                    <td>보락</td>
+                                                    <td>2,615</td>
+                                                    <td>600</td>
+                                                    <td class="text-right">+29.78%</td>
+                                                    <td class="text-right">155532138</td>
+                                                    <td class="text-right">2045</td>
+                                                </tr>
+                                            </tbody> -->
+                                        </table>
+                                    </div>
+                                </div>   
+                                <div class="col-sm-12">
+                                    <h2 class="title-1 m-b-25">거래 상위</h2>
+                                    <div class="table-responsive table--no-card m-b-40">
+                                        <table class="table table-borderless table-striped table-earning">
+                                            <thead>
+                                                <tr>
+                                                    <th>종목명</th>
+                                                    <th>현재가</th>
+                                                    <th>전일비</th>
+                                                    <th class="text-right">등략률</th>
+                                                    <th class="text-right">거래량</th>
+                                                    <th class="text-right">시가</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- <tbody>
+                                                <tr>
+                                                    <td>초록뱀</td>
+                                                    <td>2,615</td>
+                                                    <td>600</td>
+                                                    <td class="text-right">+29.78%</td>
+                                                    <td class="text-right">155532138</td>
+                                                    <td class="text-right">2045</td>
+                                                </tr>
+                                            </tbody> -->
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <h2 class="title-1 m-b-25">TOP 시가총액</h2>
+                                    <div class="table-responsive table--no-card m-b-40">
+                                        <table class="table table-borderless table-striped table-earning">
+                                            <thead>
+                                                <tr>
+                                                    <th>종목명</th>
+                                                    <th>현재가</th>
+                                                    <th>전일비</th>
+                                                    <th class="text-right">등략률</th>
+                                                    <th class="text-right">거래량</th>
+                                                    <th class="text-right">시가</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- <tbody>
+                                                <tr>
+                                                    <td>보락</td>
+                                                    <td>2,615</td>
+                                                    <td>600</td>
+                                                    <td class="text-right">+29.78%</td>
+                                                    <td class="text-right">155532138</td>
+                                                    <td class="text-right">2045</td>
+                                                </tr>
+                                            </tbody> -->
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <h2 class="title-1 m-b-25">거래 상위</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>종목명</th>
-                                                <th>현재가</th>
-                                                <th>전일비</th>
-                                                <th class="text-right">등략률</th>
-                                                <th class="text-right">거래량</th>
-                                                <th class="text-right">시가</th>
-                                            </tr>
-                                        </thead>
-                                        <!-- <tbody>
-                                            <tr>
-                                                <td>초록뱀</td>
-                                                <td>2,615</td>
-                                                <td>600</td>
-                                                <td class="text-right">+29.78%</td>
-                                                <td class="text-right">155532138</td>
-                                                <td class="text-right">2045</td>
-                                            </tr>
-                                            <tr>
-                                                <td>앤디포스</td>
-                                                <td>203000</td>
-                                                <td>46500</td>
-                                                <td class="text-right">+29.71%</td>
-                                                <td class="text-right">167623</td>
-                                                <td class="text-right">166000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>대유플러스</td>
-                                                <td>99300</td>
-                                                <td>22900</td>
-                                                <td class="text-right">+29.97%</td>
-                                                <td class="text-right">134593 </td>
-                                                <td class="text-right">75200</td>
-                                            </tr>
-                                            <tr>
-                                                <td>케이사인</td>
-                                                <td>45550</td>
-                                                <td>10500</td>
-                                                <td class="text-right">+29.96%</td>
-                                                <td class="text-right">679739</td>
-                                                <td class="text-right">41500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>KODEX 200 선물 인버스</td>
-                                                <td>57200</td>
-                                                <td>13150</td>
-                                                <td class="text-right">+29.85%</td>
-                                                <td class="text-right">114576</td>
-                                                <td class="text-right">45000</td>
-                                            </tr>
-
-                                        </tbody> -->
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <h2 class="title-1 m-b-25">TOP 시가총액</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>종목명</th>
-                                                <th>현재가</th>
-                                                <th>전일비</th>
-                                                <th class="text-right">등략률</th>
-                                                <th class="text-right">거래량</th>
-                                                <th class="text-right">시가</th>
-                                            </tr>
-                                        </thead>
-                                        <!-- <tbody>
-                                            <tr>
-                                                <td>보락</td>
-                                                <td>2,615</td>
-                                                <td>600</td>
-                                                <td class="text-right">+29.78%</td>
-                                                <td class="text-right">155532138</td>
-                                                <td class="text-right">2045</td>
-                                            </tr>
-                                            <tr>
-                                                <td>DB하이텍1우</td>
-                                                <td>203000</td>
-                                                <td>46500</td>
-                                                <td class="text-right">+29.71%</td>
-                                                <td class="text-right">167623</td>
-                                                <td class="text-right">166000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>현대비앤지스틸우</td>
-                                                <td>99300</td>
-                                                <td>22900</td>
-                                                <td class="text-right">+29.97%</td>
-                                                <td class="text-right">134593 </td>
-                                                <td class="text-right">75200</td>
-                                            </tr>
-                                            <tr>
-                                                <td>동부건설우</td>
-                                                <td>45550</td>
-                                                <td>10500</td>
-                                                <td class="text-right">+29.96%</td>
-                                                <td class="text-right">679739</td>
-                                                <td class="text-right">41500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>신원우</td>
-                                                <td>57200</td>
-                                                <td>13150</td>
-                                                <td class="text-right">+29.85%</td>
-                                                <td class="text-right">114576</td>
-                                                <td class="text-right">45000</td>
-                                            </tr>
-
-                                        </tbody> -->
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            
+                      
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
