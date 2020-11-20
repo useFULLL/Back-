@@ -5,46 +5,23 @@ var conn = db_config.init();
 // client == conn
 db_config.connect(conn);
 
-var isLogin =0 ;
-var user={
-    type:'',
-    name:'new'
-}
-userID='shalalastal@naver.com'
-type='user';
-
 router.get('/', function(req, res, next) {
-    // login하고 넘어오면 isLogin, usertype,업데이트
-    // select * from potfolio
-    var sql1='SELECT * FROM user;'
-    var sql2='SELECT * FROM portfolio;'
-    // 로그인 안 한 경우 
-    //res.render('main',{isLogin:0});
-    // 로그인한 경우
-    conn.query(sql1,function(err,results1,field){
-        if(err){
-            console.log('err2222');
+    var sql ='select CS.userstockID, CS.stockPrice, CS.stockName, CS.amount from user U, competition C, user_competition_stock CS where U.userID=? and C.status=1 and CS.competitionID=C.competitionID';
+    var stockResult = "";
+    if(req.session.userID){
+        if(req.session.type){
+            var sql ='select CS.userstockID, CS.stockPrice, CS.stockName, CS.amount from admin A, competition C, user_competition_stock CS where A.adminID=? and C.status=1 and CS.competitionID=C.competitionID';
         }
-        else{
-            var user_data=results1;
-            console.log(user_data);
-            if(type=='user'){
-                conn.query(sql2,function(err,results2,field){
-                    if(err){
-                        console.log('err3333');
-                    }
-                    else{
-                        var portfolio_data = results2;
-                        console.log(portfolio_data);
-                        res.render('main',{isLogin:1, type,user_data,portfolio_data});
-                    }
-                });
+        console.log(req.session.userID);
+        conn.query(sql,req.session.userID,function(err, result){
+            if(err){
+                console.log('err: ' + err);
+            }else{
+                stockResult=result;
             }
-            else{
-                res.render('main',{isLogin:1,user_data});
-            }           
-        }
-    });
+        });
+    }
+    res.render('main',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type, stockInfo: stockResult});
 });
 
 module.exports = router;
