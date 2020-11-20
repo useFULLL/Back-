@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
             result=re;
         }
     });
-    res.render('board/board',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type, boardData: result});
+    res.render('board',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type, boardData: result});
 });
 
 //글
@@ -29,7 +29,7 @@ router.get('/post', function(req, res, next) {
             result=re;
         }
     });
-    res.render('board/post',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type, postData: result});
+    res.render('post',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type, postData: result});
 });
 
 //글 작성
@@ -37,7 +37,7 @@ router.get('/create', function(req, res, next) {
     if(!req.session.userID){
         res.send('<script>alert("로그인이 필요합니다."); location.href="/"</script>');
     }
-    res.render('board/create',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type});
+    res.render('create',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type});
 });
 
 router.post('/create', function(req, res, next) {
@@ -79,7 +79,7 @@ router.get('/delete', function(req, res, next) {
     conn.query('select userID form board where boardID=?',boardID,function(err, result){
         if(err){
             console.log('err: ' + err);
-        }else if(result.length==0||result.userID!=userID){
+        }else if(!req.session.type&&(result.length==0||result.userID!=userID)){
             res.send('<script>alert("작성자만 삭제 가능합니다."); location.href="/"</script>');
         }else{
             conn.query('delete from board where boardID=?',boardID,function(err, result){
