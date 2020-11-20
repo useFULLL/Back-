@@ -33,7 +33,7 @@ app.use('/invest',investRouter);
 app.use('/logout',logoutRouter);
 app.use('/board',boardRouter);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log("Express server has started on port 3000");
 });
 
@@ -41,6 +41,7 @@ app.listen(port, () => {
 
 const {getData}=require("./scraper.js");
 const cron=require("node-cron");
+var result;
 
 async function handleAsync(url){
     const rec = await getData(url);
@@ -48,8 +49,30 @@ async function handleAsync(url){
 }
   
 cron.schedule("*/1 * * * * *",async()=>{
-    var result1 = await handleAsync("https://finance.naver.com/sise/sise_market_sum.nhn?&page=1");
+    result = await handleAsync("https://finance.naver.com/sise/sise_market_sum.nhn?&page=1");
     var result2 = await handleAsync("https://finance.naver.com/sise/sise_market_sum.nhn?&page=2");
     var result3 = await handleAsync("https://finance.naver.com/sise/sise_market_sum.nhn?&page=3");
-    console.log(result1);
+    for(var i=0;i<result2[0].length;i++){
+      result[0].push(result2[0][i]); result[1].push(result2[1][i]);
+      result[2].push(result2[2][i]); result[3].push(result2[3][i]);
+      result[4].push(result2[4][i]);
+    }
+    for(var i=0;i<result3[0].length;i++){
+      result[0].push(result3[0][i]); result[1].push(result3[1][i]);
+      result[2].push(result3[2][i]); result[3].push(result3[3][i]);
+      result[4].push(result3[4][i]);
+    }
+});
+
+//Soketio
+const listen = require('socket.io');
+const io = listen(server);
+
+io.sockets.on('connection',function(socket){
+
+    socket.interVal = setInterval(() => {
+        if(result){
+            socket.emit('send',result);
+        }
+    },1000);
 });
