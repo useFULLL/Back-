@@ -10,15 +10,18 @@ router.get('/', function(req, res, next) {
     if(req.session.userID){
         res.send('<script>alert("이미 로그인 되어 있습니다."); location.href="/"</script>');
     }
-    res.render('login',{userID: req.session.userID});
+    res.render('login',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type});
 });
 
 router.post('/', function(req, res, next) {
     var body = req.body;
     var sql = 'SELECT * from user WHERE userID = ? AND userPW = ?';
+    if(body.email==""||body.password==""){
+        res.send('<script>alert("입력하지 않은 정보가 있습니다."); history.back();</script>');
+    }
     var params = [body.email,body.password];
     if(body.isAdmin){
-        sql = 'SELECT * from admin WHERE userID = ? AND userPW = ?';
+        sql = 'SELECT * from admin WHERE adminID = ? AND adminPW = ?';
     }
     conn.query(sql,params,function(err, result){
         if(err){
@@ -29,7 +32,10 @@ router.post('/', function(req, res, next) {
             }else{
                 req.session.userID = body.email;
                 if(body.isAdmin){
+                    req.session.userName = result.adminName;
                     req.session.type = 'admin';
+                }else{
+                    req.session.userName = result.userName;
                 }
                 res.redirect('/');
             }

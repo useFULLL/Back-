@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
             if(err){
                 console.log('err: ' + err);
             }else{
-                res.render('invest',{userID: req.session.userID, data:result});
+                res.render('invest',{userID: req.session.userID,admin: req.session.type, data:result});
             }
         });
     }
