@@ -36,7 +36,7 @@ router.get('/create', function(req, res, next) {
     if(!req.session.userID){
         res.send('<script>alert("로그인이 필요합니다."); location.href="/"</script>');
     }
-    res.render('competition-create',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type});
+    res.render('create',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type});
 });
 
 router.post('/create', function(req, res, next) {
