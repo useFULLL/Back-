@@ -36,7 +36,7 @@ router.get('/create', function(req, res, next) {
     if(!req.session.userID){
         res.send('<script>alert("로그인이 필요합니다."); location.href="/"</script>');
     }
-    res.render('create',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type});
+    res.render('competition-create',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type});
 });
 
 router.post('/create', function(req, res, next) {
@@ -55,8 +55,8 @@ router.post('/create', function(req, res, next) {
         if(err){
             console.log('err: ' + err);
         }else{
-            if(result.Max){
-                max=(result.Max)*1;
+            if(result){
+                max=(result[0].Max)*1;
             }else{
                 max = 0;
             }
