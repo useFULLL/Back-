@@ -63,9 +63,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h3 class="title-5 m-b-35">게시판</h3>
-                            <a href="/create">
                                 <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                <i class="zmdi zmdi-plus"></i>글쓰기</button>
+                                    <a href="/board/create">
+                                <i class="zmdi zmdi-plus"></i>글쓰기</a></button>
                             </a>
                         </div>
                     </div>
@@ -86,18 +86,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% for(var i=0;i< boardData.length ;i++) {%>
-                                    <button> <a href="/post?id=<%=boardData[i].boardID%>"> 
-                                            <tr>
-                                                <td><%=i+1 %></td>
-                                                <td class="process"><%=boardData[i].postDate%></td>
-                                                <td><%=boardData[i].date %></td>
-                                                <td><%=boardData[i].userName %></td>
+                                
+                                <% for(var i=0;i < boardData.length ;i++) {%>
+                                        <tr>
+                                            <td>
+                                                 <%=i+1 %>
+                                             </td>
+                                                <td class="process"><button>                                    
+                                                    <a href="/board/post?id=<%=boardData[i].boardID%>"><%=boardData[i].title%> </a>
+                                                </button>
+                                                <td><%=boardData[i].postDate %>
+                                                </td>
+                                                <td><%=boardData[i].userName %>
+                                               </td>
                                                 
                                             </tr>
-                                            </a></button>
+                                           
+                                       
                                     <%}%>
-
+                     
                             </tbody>
                             </table>
                         </div>
