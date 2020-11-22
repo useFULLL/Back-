@@ -86,7 +86,7 @@ router.get('/:id', function(req, res, next) {
                     }
                 });
             }else{
-                res.send('<script>alert("대회 참여를 먼저 해주세요."); location.href="/invest/"</script>');
+                res.send('<script>alert("대회 참여를 먼저 해주세요."); location.href="/invest"</script>');
             }
         });
     }
@@ -102,7 +102,7 @@ router.get('/:id/join', function(req, res, next) {
             if(err){
                 console.log('err: ' + err);
             }else if(competitionResult[0]){
-                res.send('<script>alert("대회에 이미 참여했습니다."); location.href="/invest/"</script>');
+                res.send('<script>alert("대회에 이미 참여했습니다."); location.href="/invest"</script>');
             }else{
                 conn.query('select givenMoney from competition where competitionID=?',competitionID,function(err, cResult){
                     if(err){
@@ -180,21 +180,23 @@ router.post('/:id/buy', function(req, res, next) {
                     if(err){
                         console.log('err: ' + err);
                     }else{
+                        //원래 가지고 있는 주식
                         if(result[0]){
                             conn.query('update user_competition_stock set stockPrice=stockPrice+?,amount=amount+? where stockName=?',[amount*price,amount,result[0].stockName],function(err, result){
                                 if(err){
                                     console.log('err: ' + err);
                                 }else{
-                                    conn.query('update user_competition set total=total-? where competitionID=? and userID=?',[competitionID,userID],function(err, result){
+                                    conn.query('update user_competition set total=total-? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
                                         if(err){
                                             console.log('err: ' + err);
                                         }else{
-                                            res.send('<script>history.back();</script>');
+                                            res.send('<script>alert("매수완료"); history.back();</script>');
                                         }
                                     });
                                 }
                             });
                         }else{
+                            //새로 산 주식
                             var max;
                             conn.query('select max(userstockID) as MAX from user_competition_stock',function(err, result){
                                 if(err){
@@ -210,11 +212,11 @@ router.post('/:id/buy', function(req, res, next) {
                                         if(err){
                                             console.log('err: ' + err);
                                         }else{
-                                            conn.query('update user_competition set total=total-? where competitionID=? and userID=?',[competitionID,userID],function(err, result){
+                                            conn.query('update user_competition set total=total-? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
                                                 if(err){
                                                     console.log('err: ' + err);
                                                 }else{
-                                                    res.send('<script>history.back();</script>');
+                                                    res.send('<script>alert("매수완료"); history.back();</script>');
                                                 }
                                             });
                                         }
@@ -231,20 +233,54 @@ router.post('/:id/buy', function(req, res, next) {
     });
 });
 
-//매수
-router.post('/sell', function(req, res, next) {
+//매도
+router.post('/:id/sell', function(req, res, next) {
     var competitionID = req.params.id;
     var userID = req.session.userID;
+    var userID = 'aaa@aaa.com';
     var body = req.body;
     var stockName = body.stockName;
     var amount = body.amount*1;
     var price = body.price*1;
 
-    conn.query('select total from user_competition where competitionID=? and userID=?',[competitionID,userID],function(err, result){
+    conn.query('select * from user_competition_stock where competitionID=? and userID=? and stockName=?',[competitionID,userID,stockName],function(err, result){
         if(err){
             console.log('err: ' + err);
+        }else if(result[0]){
+            var haveAmount=result[0].amount*1;
+            if(haveAmount>amount){
+                conn.query('update user_competition_stock set amount=amount-?, stockPrice=stockPrice-? where competitionID=? and userID=? and stockName=?',[amount,amount*price,competitionID,userID,stockName],function(err, result){
+                    if(err){
+                        console.log('err: ' + err);
+                    }else{
+                        conn.query('update user_competition set total=total+? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
+                            if(err){
+                                console.log('err: ' + err);
+                            }else{
+                                res.send('<script>alert("매도완료"); history.back();</script>');
+                            }
+                        });
+                    }
+                });
+            }else if(haveAmount==amount){
+                conn.query('delete from user_competition_stock where competitionID=? and userID=? and stockName=?',[competitionID,userID,stockName],function(err, result){
+                    if(err){
+                        console.log('err: ' + err);
+                    }else{
+                        conn.query('update user_competition set total=total+? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
+                            if(err){
+                                console.log('err: ' + err);
+                            }else{
+                                res.send('<script>alert("매도완료"); history.back();</script>');
+                            }
+                        });
+                    }
+                });
+            }else{
+                res.send('<script>alert("현재 가지고 있는 개수보다 많이 팔 수 없습니다."); history.back();</script>');
+            }
         }else{
-
+            res.send('<script>alert("해당 주식을 가지고 있지 않습니다."); history.back();</script>');
         }
     });
 });
