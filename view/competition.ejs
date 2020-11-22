@@ -4,8 +4,8 @@
 <head>
      <!-- Title Page-->
      <title>contest</title>
-     <%- include('./partial/head'); %>
-</head>
+     <%- include('./partial/head.ejs') %>
+    </head>
 
 <body class="animsition">
     <div class="page-wrapper">
@@ -17,246 +17,66 @@
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
-            <%if(true) {%> <!--user인 경우-->
-                <div class ="section__content section__content--p30">
+            <div class ="section__content section__content--p30">
                     
-                    <!-- BREADCRUMB-->
-                    <section class="au-breadcrumb2">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="au-breadcrumb-content">
-                                        <!-- <div class="au-breadcrumb-left">
-                                            <form class="au-form-icon--sm" action="" method="post">
-                                                <input class="au-input--w300 au-input--style2" type="text" placeholder="Search for datas &amp; reports...">
-                                                <button class="au-btn--submit2" type="submit">
-                                                    <i class="zmdi zmdi-search"></i>
-                                                </button>
-                                            </form>                                 
-                                            
-                                        </div> -->
-                                        <% if(true){ <!--최신 대회 모집 기간인 경우-->
-                                            if(false){%> <!-- 참여 신청 한 경우-->
-                                                <div class="overview-wrap"></div>
-                                                <button class="au-btn au-btn-icon au-btn--blue" disabled>신청 완료</button>
-                                            </div>
-                                            <%}else{%> <!-- 참여 신청 안 한 경우-->
-                                                <div class="overview-wrap"></div>
-                                                <button class="au-btn au-btn-icon au-btn--blue"> 제 11회 주식 모의 투자 대회 참가</button>
-                                                </div>
-                                            <%}%>
+                
+                <!-- WELCOME-->
+                <section class="welcome p-t-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <center>
+                                    <h2 class="title-4 font-weight-bold">                                           
+                                        제<%=competitionData[0].competitionID%>회 주식 모의 투자 대회 결과
+                                    </h2>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- END WELCOME-->
 
-                                        <%}else if(true){%><!--대회 기간인 경우-->
-                                            <div class="overview-wrap"></div>
-                                            <button class="au-btn au-btn-icon au-btn--blue"><a href="invest.ejs">투자 하기</a></button>
-                                        </div>
-                                        <%}else{%><!--대회 끝난 경우-->
-                                        <%}%>
-                                           
-                                        
-                                    </div>
+                <!-- BREADCRUMB-->
+                <section class="au-breadcrumb2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="au-breadcrumb-content">
+                                    <div>
+                                        <div>투자 금액 : <%=competitionData[0].givenMoney%></div>
+                                        <div>내 수익금 : <%=selfData[0].total%></div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
-                    </section>
-                    <!-- END BREADCRUMB-->
+                    </div>
+                </section>
+                <!-- END BREADCRUMB-->
                    
-    
-                    <% if(true){%> <!--최신 대회 모집 기간인 경우-->
 
-                    <%}else{%><!--대회 끝난 경우-->
-                    <%}%>
-                    <!-- WELCOME-->
-                    <section class="welcome p-t-5">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <center>
-                                        <h2 class="title-4 font-weight-bold">
-                                        <% if(true){ %><!--대회 기간인 경우-->
-                                            제<%=1%>회 주식 모의 투자 랭킹
-                                        <%}else{%><!--대회 끝난 경우-->
-                                            
-                                            제<%=2%>회 주식 모의 투자 랭킹
-                                        <%}%>
-                                        <!-- <span>John!</span> -->
-                                        </h2>
-                                    </center>
-                                    
-                                    <!--<hr class="line-seprate">-->
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- END WELCOME-->
-    
                     <!-- STATISTIC-->
-                    <section class="statistic statistic2">
-                        <div class="container">
-                            <div class="row">
-                                <% if(true){%> <!--최신 대회 모집 기간인 경우 현재 대회 전 대회에 대한 랭킹 -->
-                                    <% for(var i =0; i< 3; i++){%>
-                                        <div class="col-lg-4">
-                                            <div class="statistic__item">
-                                                <center>
-                                                    <div class="h3 mb-3 font-weight-bold text-primary "> <%=i%>위 </div>
-                                                    <div class="h6 mb-2 font-weight-bold text-dark "> 이  름 : 홍길동 </div>
-                                                    <div class="h6 mb-2 font-weight-bold text-dark"> 수  익 금 : 40,000만원</div>
-                                                    <div class="h6 mb-2 font-weight-bold text-dark">수 익 률 : 50%</div>
-                                                </center>
-                                            </div>
+                <section class="statistic statistic2">
+                    <div class="container">
+                        <div class="row">
+                                <% for(var i =0; i< 1; i++){%>
+                                    <div class="col-lg-4">
+                                        <div class="statistic__item">
+                                            <center>
+                                                <div class="h3 mb-3 font-weight-bold text-primary "> <%=i%>위 </div>
+                                                <div class="h6 mb-2 font-weight-bold text-dark "> 이  름 : <%=rankData[i].userID%> </div>
+                                                <div class="h6 mb-2 font-weight-bold text-dark"> 수  익 금 : <%=rankData[i].total%>만원</div>
+                                                <div class="h6 mb-2 font-weight-bold text-dark">수 익 률 : <%=(rankData[i].total / competitionData[0].givenMoney)%>%</div>
+                                            </center>
                                         </div>
-                                    <%}%>
-                                <%}else{%><!--대회 끝난 경우 현재 대회 랭킹 표시-->
-                                    <% for(var i =0; i< 3; i++) {%>
-                                        <div class="col-lg-4">
-                                            <div class="statistic__item">
-                                                <center>
-                                                    <div class="h3 mb-3 font-weight-bold text-primary "> <%=i%>위 </div>
-                                                    <div class="h6 mb-2 font-weight-bold text-dark "> 이  름 :  </div>
-                                                    <div class="h6 mb-2 font-weight-bold text-dark"> 수  익 금 :만원</div>
-                                                    <div class="h6 mb-2 font-weight-bold text-dark">수 익 률 : %</div>
-                                                </center>
-                                            </div>
-                                        </div>
-                                    <%}%>
+                                    </div>
                                 <%}%>
-                         
-                            </div>
                         </div>
-                    </section>
-                    <!-- END STATISTIC-->
-    
-                    <!-- STATISTIC CHART-->
-                    <section class="statistic-chart">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-5">
-                                    <!-- TOP CAMPAIGN-->
-                                    <div class="top-campaign">
-                                        <h3 class="title-3 m-b-30">주식 모의 투자 대회 정보</h3>
-                                        <div class="table-responsive">
-                                            <table class="table table-top-campaign">
-                                                <tbody>
-                                                    <% for(var k=7; k>0; k--) {%>
-                                                    <tr>
-                                                        <td><button>제 <%=k%>회 주식 모의 투자 대회 (new) &nbsp 2020.11.11</button></td>
-                                                    </tr>
-                                                    <%}%>
-                                                   
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <!-- END TOP CAMPAIGN-->
-                                </div> 
-                                <!-- CHART-->
-                                <div class="col-md-6 col-lg-7">
-                                    <div class="statistic-chart-1">
-                                        <h3 class="title-3 m-b-30 font-weight-bold ">My 주식 모의 투자 대회 정보</h3>
-                                        <div class="chart-wrap">
-                                            <canvas id="team-chart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END CHART-->
-                                 
-                                
-                            </div>
-                        </div>
-                    </section>
-                                       
-                    <!-- END DATA TABLE-->
-                </div>
-
-            <%}else{%>
-                <div class ="section__content section__content--p30">
-                    
-                    <!-- BREADCRUMB-->
-                    <section class="au-breadcrumb2">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="au-breadcrumb-content">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- END BREADCRUMB-->
-    
-                    <!-- WELCOME-->
-                    <section class="welcome p-t-5">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12"><div class="statistic__item">
-                                    <center>
-                                        <% if(false){%> <!--최신 대회 모집 기간인 경우-->
-                                               <!--대회 모집-->
-                                        <div class="h3 mb-3 font-weight-bold text-primary "> 모집 중 </div>
-                                        <div class="h3 mb-3 font-weight-bold text-primary "> 모집 신청 인원 </div>
-                                        <div class="h3 mb-3 font-weight-bold text-primary "> 투자 금액  </div>
-                                        <div class="h3 mb-3 font-weight-bold text-primary "> 남은 모집 기간  </div>
-
-                                        <%}else if(false){%><!--대회 기간인 경우-->
-                                            <!--대회 시작-->
-                                        <div class="h3 mb-3 font-weight-bold text-primary "> 대회 기간 </div>
-                                        <div class="h3 mb-3 font-weight-bold text-primary "> 참여 인원 </div>
-                                        <div class="h3 mb-3 font-weight-bold text-primary "> 남은 시간  </div>
-                                            
-                                        <%}else{%><!--대회 끝난 경우-->
-                                            <!--대회 끝 (새로운 대회 시작 전)-->
-                                        <!-- <div class="h3 mb-3 font-weight-bold text-primary "> --대회 끝 </div> -->
-                                        <div class="login-form">
-                                            <div class="h3 mb-3 font-weight-bold text-primary "> 새로운 대회 생성 </div>
-                                            <form action="" method="post">
-                                                <div class="form-group">
-                                                    <label>투자 금액</label>
-                                                    <input class="au-input au-input--full" type="number" min="0" name="givenMoney">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>시작 날짜</label>
-                                                    <input class="au-input  au-input--full" type="date" name="startDate">
-                                                    <label>끝 날짜</label>
-                                                    <input class="au-input  au-input--full" type="date" name="endDate">
-                                                </div>
-                                                
-                                                <button class="au-btn au-btn--block au-btn--blue m-b-20" type="submit">대회 생성</button>
-                                            </form>
-                                            <div class="register-link">
-                                        <%}%>
-                                        
-
-                                        
-
-                                        
-                                    </center>
-                                </div>
-                                    
-                                    <!--<hr class="line-seprate">-->
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- END WELCOME-->
-    
-    
-                    <!-- COPYRIGHT-->
-                    <section class="p-t-60 p-b-20">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="copyright">
-                                        <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- END COPYRIGHT-->
-                </div>
-            <%}%>
+                    </div>
+                </section>
+                <!-- END STATISTIC-->
+                                      
+                <!-- END DATA TABLE-->
+            </div>
             
         </div>
 

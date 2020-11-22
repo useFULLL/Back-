@@ -1,26 +1,16 @@
 <div class="logo">
     <a href="/">
-        <img src="images/icon/logo-white.png" alt="Cool Admin" />
+        <img src="/images/icon/logo-white.png" alt="Cool Admin" />
     </a>
 </div>
 <div class="menu-sidebar2__content js-scrollbar1">
-    <% var userID = false; // 임시
-    if(userID){%>
+    <%if(userID){%>
     <div class="account2">
-        <div class>
-            <img src="" alt="" />
-        </div>
-            <h4 class="name"><%= user.Name %></h4>
-            <h5 ><%= user.money %>￦</h5>
-            <a href="/login">Sign out</a>
-
-        <a href="/login">Sign in</a>
+            <h4 class="name"><%=userID%></h4>
+            <a href="/logout">Sign out</a>
     </div>
     <%} else{%>
         <div class="account2">
-            <div class>
-                <img src="" alt="" />
-            </div>
                 <h4 class="name">new </h4>
                 <a href="/login">Sign in</a>
         </div>
@@ -38,11 +28,7 @@
                 </a>
                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                     <li>
-                        <a href="/competition">
-                            <i class="fas fa-tachometer-alt"></i>대회 참여</a>
-                    </li>
-                    <li>
-                        <a href="/competition-list">
+                        <a href="/invest">
                             <i class="fas fa-tachometer-alt"></i>대회 리스트</a>
                     </li>
                    

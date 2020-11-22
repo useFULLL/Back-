@@ -5,7 +5,7 @@
 <head>
     <!-- Title Page-->
     <title>MainPage</title>
-    <%- include('./partial/head'); %>
+    <%- include('./partial/head.ejs') %>
 </head>
 
 <body class="animsition">
@@ -19,23 +19,22 @@
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <!-- <%- include('./partial/header-desktop'); %> -->
-            <!-- HEADER DESKTOP-->
-
-            <!-- MAIN CONTENT-->
-
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
+                        <%if(admin){%> 
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
+                                    <a href='/invest/create'>                                    
                                     <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>00모의 투자 대회 참가 버튼(신청 여부에 따라 다름)</button>
+                                        <i class="zmdi zmdi-plus"></i>대회 생성
+                                    </button>
+                                </a>
                                 </div>
                             </div>
                         </div>
+                        <%}%>
                         <div class="row">
                             <div class="col-lg">
                                 <h2 class="title-1 m-b-25">대회 목록</h2>
@@ -44,20 +43,38 @@
                                         <thead>
                                             <tr>
                                                 <th>대회 이름</th>
-                                                <th>투자 금액</th>
-                                                <th>대회 참여 여부</th>
-                                                <th>모집 기간</th>
-                                                <th>대회 기간</th>
-                                                <th>참여</th>                                                
+                                                <th>투자 금액(만원)</th>
+                                                <th>시작 날짜</th>
+                                                <th>끝 날짜</th>
+                                                <th>상태</th>                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>                                                   
-                                                <% for(var i =0; i < 5;i++){%>
-                                                    <td class="text-center">-</td>
-                                                <%}%>
-                                                <td><button>참가</button></td>
-                                            </tr>
+                                            <%for(var i=0; i< competitionData.length;i++){%>
+                                                <tr>                               
+                                                    <td>제<%=competitionData[i].competitionID%>회</td>
+                                                    <td><%=competitionData[i].givenMoney%></td>
+                                                    <td><%=competitionData[i].startDate%></td>
+                                                    <td><%=competitionData[i].endDate%></td>
+                                                    <% let today = new Date();
+                                                    if(competitionData[i].startDate > today){
+                                                        if(competitionData[i].joined==0){%>
+                                                            <td><a href='/invest/<%=competitionData[i].competitionID%>/join'><button class="au-btn2 au-btn2--blue">모집</button></a></td>
+                                                        
+                                                            <%}else{%>
+                                                                <td><a href='#'><button class="au-btn2 au-btn2--white">완료</button></a></td>
+                                                        
+                                                            <%}%>
+                                                        
+                                                        
+                                                    <%}else if(competitionData[i].endDate > today){%>
+                                                        <td><a href='/invest/<%=competitionData[i].competitionID%>'><button class="au-btn2 au-btn2--green">참여</button></a></td>
+                                                    <%}else{%>
+                                                        <td><a href='/invest/<%=competitionData[i].competitionID%>/result'><button  class="au-btn2 au-btn2--red">종료</button></a></td>
+                                                    <%}%>
+                                                    
+                                                </tr>
+                                            <%}%>
                                         </tbody>
                                     </table>
                                 </div>
