@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <!-- Title Page-->
+     <title>contest</title>
+     <%- include('./partial/head.ejs') %>
+    </head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar2">
+            <%- include('./partial/menu-sidebar'); %>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="login-form">
+            <div class="h3 mb-3 font-weight-bold text-primary "> 새로운 대회 생성 </div>
+            <form action="/invest/create" method="post">
+                <div class="form-group">
+                    <label>투자 금액</label>
+                    <input class="au-input au-input--full" type="number" min="0" name="givenmoney">
+                    </div>
+                    <div class="form-group">
+                    <label>시작 날짜</label>
+                    <input class="au-input  au-input--full" type="date" name="startdate">
+                    <label>종료 날짜</label>
+                    <input class="au-input  au-input--full" type="date" name="enddate">
+                </div>
+                    
+                <button class="au-btn au-btn--block au-btn--blue m-b-20" type="submit">대회 생성</button>
+            </form>
+        </div>
+
+    </div>
+    <%- include('./partial/body-js.ejs') %>
+</body>
+
+</html>
+<!— end document—>
