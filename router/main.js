@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
         if(req.session.type){
             var sql ='select CS.userstockID, CS.stockPrice, CS.stockName, CS.amount from admin A, competition C, user_competition_stock CS where A.adminID=? and C.status=1 and CS.competitionID=C.competitionID';
         }
-        console.log(req.session.userID);
         conn.query(sql,req.session.userID,function(err, result){
             if(err){
                 console.log('err: ' + err);
