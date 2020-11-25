@@ -448,6 +448,73 @@ section {
 /*                   COMPONENTS                        */
 /*-----------------------------------------------------*/
 /* ----- Buttons----- */
+.au-btn2 {
+    line-height: 30px;
+    padding: 0 5px;
+    text-transform: uppercase;
+    color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.au-btn2:hover {
+    color: #fff;
+    background: #3868cd;
+}
+
+.au-btn2--blue2 {
+    background: #00aced;
+}
+
+.au-btn2--blue2:hover {
+    background: #00a2e3;
+}
+
+.au-btn2--block {
+    display: block;
+    width: 100%;
+}
+
+.au-btn2-icon i {
+    vertical-align: baseline;
+    margin-right: 5px;
+}
+
+.au-btn2--blue {
+    background: #365cad;
+}
+.au-btn2--blue:hover {
+    background: #365cad;
+}
+
+.au-btn2--green {
+    background: #63c76a;
+}
+
+.au-btn2--green:hover {
+    background: #59bd60;
+}
+
+.au-btn2--white{
+    background: whitesmoke;
+}
+.au-btn2--white:hover {
+    background: whitesmoke;
+}
+
+.au-btn2--red{
+    background: rgb(161, 50, 7);
+}
+.au-btn2--red:hover {
+    background: rgb(161, 50, 7);
+}
+
 .au-btn {
     line-height: 45px;
     padding: 0 35px;
@@ -496,6 +563,20 @@ section {
 
 .au-btn--green:hover {
     background: #59bd60;
+}
+
+.au-btn--gary{
+    background: #868e96;
+}
+.au-btn--gary:hover {
+    background: #868e96;
+}
+
+.au-btn--red{
+    background: rgb(161, 50, 7);
+}
+.au-btn--red:hover {
+    background: rgb(161, 50, 7);
 }
 
 .au-btn-plus {
@@ -2196,6 +2277,7 @@ section {
     font-size: 20px;
     margin-top: 20px;
     margin-bottom: 5px;
+    color: cornflowerblue;
 }
 
 .account2 > a {
@@ -4469,11 +4551,11 @@ section {
 }
 
 .table-top-campaign.table tr td:first-child {
-    color: #808080;
+    color:  #4272d7;
 }
 
 .table-top-campaign.table tr td:last-child {
-    color: #4272d7;
+    color: #808080;
     text-align: center;
 }
 
@@ -4714,7 +4796,7 @@ section {
     border-top-right-radius: 3px;
 }
 
-.table-data3 thead tr th:last-child {
+. thead tr th:last-child {
     text-align: right;
     padding-right: 50px;
 }
@@ -4732,7 +4814,9 @@ section {
 .table-data3 tbody tr td:last-child {
     text-align: right;
     padding-right: 50px;
+
 }
+
 
 .table-data3 tbody tr {
     border-left: 1px solid #e5e5e5;
