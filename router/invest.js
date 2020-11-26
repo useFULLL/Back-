@@ -127,7 +127,7 @@ router.get('/:id/join', function(req, res, next) {
 //대회 목록 - /invest/:id/result
 router.get('/:id/result', function(req, res, next) {
     var competitionID = req.params.id;
-    var selfR;
+    var selfR=false;
     conn.query('select * from competition where competitionID=?',competitionID,function(err, result){
         if(err){
             console.log('err: ' + err);
