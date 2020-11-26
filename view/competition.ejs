@@ -60,7 +60,12 @@
                 <section class="statistic statistic2">
                     <div class="container">
                         <div class="row">
-                                <% for(var i =0; i< rankData.length; i++){%>
+                                <% if(rankData.length>3){
+                                    var length = 3;
+                                }else{
+                                    var length = rankData.length;
+                                }
+                                    for(var i =0; i< length; i++){%>
                                     <div class="col-lg-4">
                                         <div class="statistic__item">
                                             <center>
