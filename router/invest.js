@@ -149,6 +149,8 @@ router.get('/:id/result', function(req, res, next) {
                                     if(err){
                                         console.log('err: ' + err);
                                     }else{
+                                        console.log("competitionData ="+competitionResult);
+                                        console.log("selfdata ="+selfResult);
                                         res.render('competition',{userID: req.session.userID,admin: req.session.type, competitionData:competitionResult, rankData: rankResult, selfData: selfResult});
                                     }
                                 });
@@ -237,7 +239,6 @@ router.post('/:id/buy', function(req, res, next) {
 router.post('/:id/sell', function(req, res, next) {
     var competitionID = req.params.id;
     var userID = req.session.userID;
-    var userID = 'aaa@aaa.com';
     var body = req.body;
     var stockName = body.stockName;
     var amount = body.amount*1;
