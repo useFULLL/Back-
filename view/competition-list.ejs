@@ -57,21 +57,24 @@
                                                     <td><%=competitionData[i].startDate%></td>
                                                     <td><%=competitionData[i].endDate%></td>
                                                     <% let today = new Date();
-                                                    if(competitionData[i].startDate > today){
-                                                        if(competitionData[i].joined==0){%>
-                                                            <td><a href='/invest/<%=competitionData[i].competitionID%>/join'><button class="au-btn2 au-btn2--blue">모집</button></a></td>
-                                                        
-                                                            <%}else{%>
-                                                                <td><a href='#'><button class="au-btn2 au-btn2--white">완료</button></a></td>
-                                                        
-                                                            <%}%>
-                                                        
-                                                        
-                                                    <%}else if(competitionData[i].endDate > today){%>
-                                                        <td><a href='/invest/<%=competitionData[i].competitionID%>'><button class="au-btn2 au-btn2--green">참여</button></a></td>
-                                                    <%}else{%>
-                                                        <td><a href='/invest/<%=competitionData[i].competitionID%>/result'><button  class="au-btn2 au-btn2--red">종료</button></a></td>
-                                                    <%}%>
+                                                    if(competitionData[i].joined==1){
+                                                        if(competitionData[i].startDate > today){%>
+                                                            <td><a href='/invest/<%=competitionData[i].competitionID%>/join'><button class="au-btn2 au-btn2--blue">대회모집</button></a></td>
+                                                        <%}else if(competitionData[i].endDate > today){%>
+                                                            <td><a href='/invest/<%=competitionData[i].competitionID%>'><button class="au-btn2 au-btn2--green">대회참여</button></a></td>
+                                                        <%}else{%>
+                                                            <td><a href='/invest/<%=competitionData[i].competitionID%>/result'><button  class="au-btn2 au-btn2--red">대회종료</button></a></td>
+                                                        <%}%>
+                                                    <%}else{
+                                                        if(competitionData[i].startDate > today){%>
+                                                            <td><a href='#'><button class="au-btn2 au-btn2--white">신청완료</button></a></td>
+                                                        <%}else if(competitionData[i].endDate > today){%>
+                                                            <td><a href='#'><button class="au-btn2 au-btn2--white">참여불가</button></a></td>
+                                                        <%}else{%>
+                                                            <td><a href='/invest/<%=competitionData[i].competitionID%>/result'><button  class="au-btn2 au-btn2--red">대회종료</button></a></td>
+                                                        <%}%>
+                                                    <%}%>    
+                                                    
                                                     
                                                 </tr>
                                             <%}%>

@@ -502,10 +502,10 @@ section {
 }
 
 .au-btn2--white{
-    background: whitesmoke;
+    background: darkgray;
 }
 .au-btn2--white:hover {
-    background: whitesmoke;
+    background: darkgray;
 }
 
 .au-btn2--red{
