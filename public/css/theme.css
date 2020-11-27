@@ -207,6 +207,17 @@ strong {
     color: #fff;
 }
 
+.title-7 {    
+    text-transform: capitalize;
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    background-color: #4272d7;
+    width: max-content;
+    padding: 10px;
+    float: right;
+}
+
 .heading-title {
     font-size: 24px;
     font-weight: 500;
@@ -4766,6 +4777,11 @@ section {
 @media (min-width: 1200px) {
     .table-responsive-data3 {
         height:100px;
+        overflow: auto;
+    }
+
+    .table-responsive-data4 {
+        height:200px;
         overflow: auto;
     }
 }
