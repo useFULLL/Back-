@@ -51,6 +51,10 @@ router.post('/create', function(req, res, next) {
     var sql = 'insert into board values(?,?,?,?,now())';
     var param;
 
+    if(title==""||description==""){
+        res.send('<script>alert("미입력된 내용이 있습니다."); location.href="/"</script>');
+    }
+
     conn.query('select max(boardID) as Max from board',function(err, result){
         if(err){
             console.log('err: ' + err);

@@ -8,7 +8,8 @@ db_config.connect(conn);
 //대회 목록 - /invest/
 router.get('/', function(req, res, next) {
     if(req.session.userID){
-        conn.query('select *, if(exists(select * from user_competition UC where UC.competitionID=C.competitionID and UC.userID=?),1,0) as joined from competition C',req.session.userID,function(err, result){
+        conn.query('select C.competitionID,C.status,C.givenMoney,C.adminID, if(exists(select * from user_competition UC where UC.competitionID=C.competitionID and UC.userID=?),1,0) as joined, date_format(C.startDate,\'%Y-%m-%d\')'+
+        'as startDate, date_format(C.endDate,\'%Y-%m-%d\') as endDate from competition C',req.session.userID,function(err, result){
             if(err){
                 console.log('err: ' + err);
             }else{
@@ -73,18 +74,24 @@ router.get('/:id', function(req, res, next) {
     var competitionID = req.params.id;
     if(!req.session.userID){
         res.send('<script>alert("로그인이 필요합니다."); location.href="/"</script>');
+    }else if(req.session.type){
+        res.send('<script>alert("관리자는 참여가 불가능 합니다."); location.href="/"</script>');
     }else{
         conn.query('select * from user_competition where competitionID=? and userID=?',[competitionID,req.session.userID],function(err, competitionResult){
             if(err){
                 console.log('err: ' + err);
             }else if(competitionResult[0]){
-                conn.query('select * from user_competition_stock where userID=?',req.session.userID,function(err, stockResult){
-                    if(err){
-                        console.log('err: ' + err);
-                    }else{
-                        res.render('invest',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type, userData: competitionResult, stockData: stockResult});
-                    }
-                });
+                if(competitionResult[0].status==2){
+                    res.send('<script>alert("이미 종료된 대회입니다."); location.href="/"</script>');
+                }else{
+                    conn.query('select * from user_competition_stock where userID=?',req.session.userID,function(err, stockResult){
+                        if(err){
+                            console.log('err: ' + err);
+                        }else{
+                            res.render('invest',{userID: req.session.userID,userName: req.session.userName,admin: req.session.type, userData: competitionResult, stockData: stockResult});
+                        }
+                    });
+                }
             }else{
                 res.send('<script>alert("대회 참여를 먼저 해주세요."); location.href="/invest"</script>');
             }
@@ -97,6 +104,8 @@ router.get('/:id/join', function(req, res, next) {
     var competitionID = req.params.id;
     if(!req.session.userID){
         res.send('<script>alert("로그인이 필요합니다."); location.href="/"</script>');
+    }else if(req.session.type){
+        res.send('<script>alert("관리자는 참여가 불가능 합니다."); location.href="/"</script>');
     }else{
         conn.query('select * from user_competition where competitionID=? and userID=?',[competitionID,req.session.userID],function(err, competitionResult){
             if(err){
