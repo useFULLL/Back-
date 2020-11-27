@@ -16,7 +16,7 @@ socket.on('sendTop',function(data){
                     $("#userInvest tr:eq("+k+") td:eq("+2+")").html(data[2][i-1]);
 
                     var total=$("#total").val()*1;
-                    var buy = data[5][i-1].replace(",","");
+                    var buy = data[6][i-1].replace(",","");
                     var amount = $("#userInvest tr:eq("+k+") td:eq("+5+")").text();
                     var stockPrice = $("#userInvest tr:eq("+k+") td:eq("+6+")").text();
 

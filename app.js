@@ -85,7 +85,58 @@ cron.schedule("*/1 * * * * *",async()=>{
     result[4].push(result3[4][i]);
   }
   fund=gfund;top=gtop;over=gover;
-})
+});
+
+var db_config = require('./config/database');
+var conn = db_config.init();
+
+db_config.connect(conn);
+
+cron.schedule("*/1 * * * * *",async()=>{
+  //0 시작 전, 1 진행 중, 2 종료
+  //date_format(B.postDate,\'%Y-%m-%d\')
+  conn.query("select competitionID, date_format(startDate,\'%Y-%m-%d\') as startDate, date_format(endDate,\'%Y-%m-%d\') as endDate, date_format(now(),\'%Y-%m-%d %h:%i:%s\') as now from competition where status=0",function(err, result){
+    if(err){
+        console.log('err: ' + err);
+    }else{
+      if(result[0]){
+        for(i=0;i<result.length;i++){
+          var competitionID = result[i].competitionID;
+          var startDate = result[i].startDate + " 08:30:00";
+          var now = result[i].now;
+          if(startDate<=now){
+            conn.query("update competition set status=1 where competitionID=?",competitionID,function(err, result){
+              if(err){
+                  console.log('err: ' + err);
+              }
+            });
+          }
+        }
+      }
+    }
+  });
+  
+  conn.query("select competitionID, date_format(startDate,\'%Y-%m-%d\') as startDate, date_format(endDate,\'%Y-%m-%d\') as endDate, date_format(now(),\'%Y-%m-%d %h:%i:%s\') as now from competition where status=1",function(err, result){
+    if(err){
+        console.log('err: ' + err);
+    }else{
+      if(result[0]){
+        for(i=0;i<result.length;i++){
+          var competitionID = result[i].competitionID;
+          var endDate = result[i].endDate + " 18:00:00";
+          var now = result[i].now;
+          if(endDate<=now){
+            conn.query("update competition set status=2 where competitionID=?",competitionID,function(err, result){
+              if(err){
+                  console.log('err: ' + err);
+              }
+            });
+          }
+        }
+      }
+    }
+  });
+});
 
 //Soketio
 const listen = require('socket.io');

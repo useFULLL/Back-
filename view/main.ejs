@@ -4,7 +4,12 @@
 <head>
     <!-- Title Page-->
     <title>MainPage</title>
-    <%- include('./partial/head'); %>
+    <%- include('./partial/head.ejs') %>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/mainindex.js"></script>
+</head>
+
 </head>
 
 <body class="animsition">
@@ -31,87 +36,94 @@
                                 <div class="col-sm-12">
                                     <h2 class="title-1 m-b-25">TOP 상한가 종목</h2>
                                     <div class="table-responsive table--no-card m-b-40">
-                                        <table class="table table-borderless table-striped table-earning">
+                                        <table class="table table-borderless table-striped table-earning" id="overstock">
                                             <thead>
                                                 <tr>
                                                     <th>종목명</th>
                                                     <th>현재가</th>
                                                     <th>전일비</th>
-                                                    <th class="text-right">등략률</th>
+                                                    <th class="text-right">시가총액</th>
                                                     <th class="text-right">거래량</th>
-                                                    <th class="text-right">시가</th>
                                                 </tr>
                                             </thead>
-                                            <!-- <tbody>
+                                            <tbody>
+                                             <% for(var i=0;i<5;i++){ %>
                                                 <tr>
-                                                    <td>보락</td>
-                                                    <td>2,615</td>
-                                                    <td>600</td>
-                                                    <td class="text-right">+29.78%</td>
-                                                    <td class="text-right">155532138</td>
-                                                    <td class="text-right">2045</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-right"></td>
+                                                    <td class="text-right"></td>
+
                                                 </tr>
-                                            </tbody> -->
+                                                <%}%>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>   
                                 <div class="col-sm-12">
-                                    <h2 class="title-1 m-b-25">거래 상위</h2>
+                                    <h2 class="title-1 m-b-25">검색 상위</h2>
                                     <div class="table-responsive table--no-card m-b-40">
-                                        <table class="table table-borderless table-striped table-earning">
+                                        <table class="table table-borderless table-striped table-earning" id="topstock">
                                             <thead>
                                                 <tr>
                                                     <th>종목명</th>
                                                     <th>현재가</th>
                                                     <th>전일비</th>
-                                                    <th class="text-right">등략률</th>
+                                                    <th>시가총액</th>
                                                     <th class="text-right">거래량</th>
-                                                    <th class="text-right">시가</th>
+                                                    <th class="text-right">매수호가</th>
+                                                    <th class="text-right">매도호가</th>
                                                 </tr>
                                             </thead>
-                                            <!-- <tbody>
+                                            <tbody>
+                                             <% for(var i=0;i<5;i++){ %>
                                                 <tr>
-                                                    <td>초록뱀</td>
-                                                    <td>2,615</td>
-                                                    <td>600</td>
-                                                    <td class="text-right">+29.78%</td>
-                                                    <td class="text-right">155532138</td>
-                                                    <td class="text-right">2045</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-right"></td>
+                                                    <td class="text-right"></td>
+                                                    <td class="text-right"></td>
+                                                    <td class="text-right"></td>
                                                 </tr>
-                                            </tbody> -->
+                                                <%}%>
+                                            </tbody> 
                                         </table>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <h2 class="title-1 m-b-25">TOP 시가총액</h2>
                                     <div class="table-responsive table--no-card m-b-40">
-                                        <table class="table table-borderless table-striped table-earning">
+                                        <table class="table table-borderless table-striped table-earning" id="top">
                                             <thead>
                                                 <tr>
                                                     <th>종목명</th>
                                                     <th>현재가</th>
                                                     <th>전일비</th>
-                                                    <th class="text-right">등략률</th>
-                                                    <th class="text-right">거래량</th>
                                                     <th class="text-right">시가</th>
+                                                    <th class="text-right">거래량</th>
+
                                                 </tr>
                                             </thead>
-                                            <!-- <tbody>
+                                           <tbody>
+
+                                            <% for(var i=0;i<5;i++){ %>
                                                 <tr>
-                                                    <td>보락</td>
-                                                    <td>2,615</td>
-                                                    <td>600</td>
-                                                    <td class="text-right">+29.78%</td>
-                                                    <td class="text-right">155532138</td>
-                                                    <td class="text-right">2045</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-right"></td>
+                                                    <td class="text-right"></td>
                                                 </tr>
-                                            </tbody> -->
+                                                <%}%>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                             
-                      
+        
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
@@ -119,7 +131,7 @@
     </div>
 
     <%- include('./partial/body-js.ejs') %>
-
+    
 </body>
 
 </html>

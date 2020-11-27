@@ -4,7 +4,12 @@
 <head>
     <!-- Title Page-->
     <title>Meme</title>
-    <%- include('./partial/head'); %>
+    <%- include('./partial/head.ejs') %>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/investIndex.js"></script>
+
+
 </head>
 
 <body class="animsition">
@@ -20,51 +25,88 @@
                             <div class="card-header">
                                 <h4>주식</h4>
                             </div>
-                            <div class="card-body">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">매수</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">매도</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content p-1" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="form-group">
-                                            <label for="selectSm" class=" form-control-label">종목</label>
-                                            <div>text</div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-4">
-                                                <label for="selectSm" class=" form-control-label">수량</label>
+                            
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">매수</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">매도</a>
+                                        </li>
+                                    </ul>
+                                    
+                                    <div class="tab-content p-1" id="myTabContent">
+                                        
+                                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                <form action="/invest/<%=userData[0].competitionID%>/buy" method="post" id="formContens">
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-4">
+                                                            <label for="selectSm" class=" form-control-label"  >종목명</label>
+                                                        </div>
+                                                        <div class="col col-md-8">
+                                                            <input type="text" id="sName" name="stockName"></input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-4">
+                                                            <label for="selectSm" class=" form-control-label" >수량</label>
+                                                        </div>
+                                                        <div class="col col-md-8">
+                                                            <input type='number' min='1' max='100000000' id ="Snum" value="1" name="amount"></input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-4">
+                                                            <label for="selectSm" class=" form-control-label">총 금액</label>
+                                                        </div>
+                                                        <div class="col col-md-8">
+                                                            <input type="number" id="tprice"></input>
+                                                        </div>
+                                                    </div>
+                                                    <input type="number" id="sprice"style="display:none;" name="price"></input>
+        
+                                                    <button type="submit" class="btn btn-primary btn-block">
+                                                        <i class="fa fa-star"></i>&nbsp; 매수</button>
+                                                </div>
+                                                </form>
+                                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                <form action="/invest/<%=userData[0].competitionID%>/sell" method="post" id="formContens">
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-4">
+                                                            <label for="selectSm" class=" form-control-label"  >종목명</label>
+                                                        </div>
+                                                        <div class="col col-md-8">
+                                                            <input type="text" id="sName2" name="stockName"></input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-4">
+                                                            <label for="selectSm" class=" form-control-label" >수량</label>
+                                                        </div>
+                                                        <div class="col col-md-8">
+                                                            <input type='number' min='1' max='100000000' id ="Snum2" value="1" name="amount"></input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-4">
+                                                            <label for="selectSm" class=" form-control-label">총 금액</label>
+                                                        </div>
+                                                        <div class="col col-md-8">
+                                                            <input type="number" id="tprice2" ></input>
+                                                        </div>
+                                                    </div>
+                                                    <input type="number" id="sprice2" style="display:none;" name="price"></input>
+                                                    <button type="submit" class="btn btn-primary btn-block">
+                                                        <i class="fa fa-star"></i>&nbsp; 매도</button>
+                                                </form>
                                             </div>
-                                            <div class="col col-md-8">
-                                                <input type='number' min='1' max='100000000'></input>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-block">
-                                            <i class="fa fa-star"></i>&nbsp; 매수</button>
+                                        
+                                        
                                     </div>
-                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="form-group">
-                                            <label for="selectSm" class=" form-control-label">종목</label>
-                                            <div>text</div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-4">
-                                                <label for="selectSm" class=" form-control-label">수량</label>
-                                            </div>
-                                            <div class="col col-md-8">
-                                                <input type="number" min="1" max="100"></input>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-block">
-                                            <i class="fa fa-star"></i>&nbsp; 매도</button>
-                                    </div>
-                                </div>
-
-                                </div>
+                                </div>    
+                            </form>
+                            
                             </div>
                         </div>
                     </div>
@@ -86,115 +128,68 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
+                                
+                                <h3 class="title-7 m-b-25">잔고 : <%=userData[0].total%> 원</h3>
                                 <!-- DATA TABLE-->
                                 <h3 class="title-5 m-b-25">내 투자 정보</h3>
 
-                                <div class="table-responsive table-responsive-data3  m-b-40">
-                                    <table class="table table-borderless table-data3">
+                                <div class="table-responsive table-responsive-data4  m-b-40">
+                                    <table class="table table-borderless table-data3" id="userInvest">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">종목명</th>
+                                                <th class="text-left">주식명</th>
+                                                <th class="text-left">매도호가</th>
                                                 <th class="text-left">전일비</th>
-                                                <th class="text-left">현재가</th>
                                                 <th class="text-left">수익률</th>
-                                                <th class="text-left">수익</th>
+                                                <th class="text-left">수익금</th>
                                                 <th class="text-left">보유수량</th>
+                                                <th class="text-left">거래금</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <% for(var i=0; i < portfolio.length; i++){%>
+                                        <tbody id="sell-table">
+                                            <% for(var i=0; i < stockData.length ; i++){%>
                                                 <tr>
-                                                    <td><%=portfolio[i].userID%></td>
-                                                    <td>+ <%=portfolio[i].stockName%></td>
-                                                    <td><%=portfolio[i].price%>원</td>
-                                                    <td>+/-<%=portfolio[i].userID%> %</td>
-                                                    <td>+ <%=portfolio[i].stockName%>원</td>
-                                                    <td><%=portfolio[i].price%>주</td>
+                                                    <td><%=stockData[i].stockName%></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td> </td>
+                                                    <td><%=stockData[i].amount%></td>
+                                                    <td><%=stockData[i].stockPrice%> </td>
                                                 </tr>
                                             <%}%>
-                                            
-<!-- 
-                                            <tr>
-                                                <td>삼성전자</td>
-                                                <td class="process">+1200</td>
-                                                <td>48750원</td>
-                                                <td>+1.8%</td>
-                                                <td>0원</td>
-                                                <td>10주</td>
-                                            </tr>
-                                            <tr>
-                                                <td>LG디스플레이</td>
-                                                <td class="denied">-450</td>
-                                                <td>10250원</td>
-                                                <td>+0.0%</td>
-                                                <td>0원</td>
-                                                <td>10주</td>
-                                            </tr>
-                                            <tr>
-                                                <td>삼성카드</td>
-                                                <td class="denied">-200</td>
-                                                <td>29300원</td>
-                                                <td>+0.0%</td>
-                                                <td>0원</td>
-                                                <td>0주</td>
-                                            </tr>
-                                            <tr>
-                                                <td>LG전자</td>
-                                                <td class="denied">-900</td>
-                                                <td>54300원</td>
-                                                <td>+0.0%</td>
-                                                <td>0원</td>
-                                                <td>0주</td>
-                                            </tr>
-                                            <tr>
-                                                <td>대한항공</td>
-                                                <td class="denied">-500</td>
-                                                <td>19600원</td>
-                                                <td>+0.0%</td>
-                                                <td>0원</td>
-                                                <td>0주</td>
-                                            </tr> -->
+                                           
                                         </tbody>
                                     </table>
                                 </div>
                                 <h3 class="title-5 m-b-25">투자 가능 주식 목록</h3>
                                 <div class="table-responsive table-responsive-data2">
-                                    <table class="table table-data2">
+                                    <table class="table table-data2" id="stockList">
                                         <thead>
                                             <tr>
-                                                <!-- <th>
-                                                    <label class="au-checkbox">
-                                                        <input type="checkbox">
-                                                        <span class="au-checkmark"></span>
-                                                    </label>
-                                                </th> -->
-                                                <th>선택</th>
-                                                <th>종목명</th>
+                                                <th>주식명</th>
                                                 <th>현재가</th>
                                                 <th>전일비</th>
-                                                <th>등락률</th>
+                                                <th>시가총액</th>
                                                 <th>거래량</th>
                                                 <th>매수호가</th>
                                                 <th>매도호가</th>
                                             </tr>
                                         </thead>                                
-                                        <tbody class ="table-data">
-                                            <% for(var i=0; i < 10; i++){%>
-                                                <tr class="tr-shadow">
-                                                    <th>
-                                                        <input type="radio" id ="select_ST" name="select-ST">
-                                                        <!-- <label class="au-checkbox">
-                                                            <input type="checkbox">
-                                                            <span class="au-checkmark"></span>
-                                                        </label> -->
-                                                    </th>                                                    
-                                                    <% for(var j=0; j < 7; j++){%>
-                                                        <td>-</td>                                                       
-                                                    <%}%>
+                                        <tbody class ="table-data" id ='buy-table'>
+
+                                            <!--동적으로 정보 넘어오는 부분-->
+                                            <% for(var i=0; i < 100; i++){%>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                             <%}%>
-                                            
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -204,12 +199,123 @@
                     </div>
                 </div>
             </div>
+            <input type="radio" id="select_ST" name="select-ST">
         </div>
 
     </div>
     <%- include('./partial/body-js.ejs') %>
+    <script>
+        var tmpPrice1 = 0;
+        var tmpPrice2 = 0;
+        // 테이블 클릭하는 경우 매매 텝바로 정보 전달(동적 테이블에 대해서)
+        $(document.body).delegate('#buy-table tr', 'click', function() {    
+ 
+            var str = ""
+            var tdArr = new Array();    // 배열 선언
+                
+            // 현재 클릭된 Row(<tr>)
+            var tr = $(this);
+            var td = tr.children();
 
+            // tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
+            console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+                    
+            // 반복문을 이용해서 배열에 값을 담아 사용할 수 도 있다.
+            td.each(function(i){
+                tdArr.push(td.eq(i).text());
+            });
+                
+            // td.eq(index)를 통해 값을 가져옴. 
+            var one = td.eq(0).text();
+            var six = td.eq(5).text();
+            // 가격에서 , 제거하는 과정 ( five는 임의로 넣은 값이고 매수호가 가져오면 그 값 사용)
+            six = six.replace(",","").replace(",",""); 
+            console.log("one : "+one);
+            console.log("six : "+six);
+
+
+            // $('#tprice').empty();
+            // $('#tprice').append(five);
+            tmpPrice1 = parseInt(six);
+            var num = parseInt($("#Snum").val());
+            if(num =='NaN')  {
+                num=1;
+                console.log('hsh');
+            }
+            var totalPrice = tmpPrice1 * num;
+            $('#tprice').empty();
+            $('#tprice').val(totalPrice);
+            $('#sprice').empty();
+            $('#sprice').val(tmpPrice1);
+            $('#sName').empty();
+            $('#sName').val(one);
+
+        })
+        // 수량을 변경하는 경우 총 가격 update
+        $(document).on('input', '#Snum', function(){
+            var num = parseInt($("#Snum").val());
+            var total = num*tmpPrice1;
+            console.log("1total:"+total);
+            $('#tprice').empty();
+            $('#tprice').val(total);
+        })
+
+        // 테이블 클릭하는 경우 매매 텝바로 정보 전달(동적 테이블에 대해서)
+        $(document.body).delegate('#sell-table tr', 'click', function() {    
+ 
+            var str = ""
+            var tdArr = new Array();    // 배열 선언
+                
+            // 현재 클릭된 Row(<tr>)
+            var tr = $(this);
+            var td = tr.children();
+
+            // tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
+            console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+                    
+            // 반복문을 이용해서 배열에 값을 담아 사용할 수 도 있다.
+            td.each(function(i){
+                tdArr.push(td.eq(i).text());
+            });
+                
+            // td.eq(index)를 통해 값을 가져옴. 
+            var one = td.eq(0).text();
+            var two = td.eq(1).text();
+            // 가격에서 , 제거하는 과정 ( five는 임의로 넣은 값이고 매수호가 가져오면 그 값 사용)
+            two = two.replace(",","").replace(",",""); 
+
+            tmpPrice2 = parseInt(two);
+            var num = parseInt($("#Snum2").val());
+            if(num =='NaN')  {
+                num=1;
+                console.log('hsh');
+            }
+            var totalPrice = tmpPrice2 * num;
+            $('#tprice2').empty();
+            $('#tprice2').val(totalPrice);
+            $('#sprice2').empty();
+            $('#sprice2').val(tmpPrice2);
+            $('#sName2').empty();
+            $('#sName2').val(one);
+
+        })
+
+        // 수량을 변경하는 경우 총 가격 update
+        $(document).on('input', '#Snum2', function(){
+            var num = parseInt($("#Snum2").val());
+            var total = num*tmpPrice2;
+            console.log("2total:"+total);
+            $('#tprice2').empty();
+            $('#tprice2').val(total);
+        })
+        
+
+    </script>
 </body>
 
 </html>
 <!-- end document-->
+
+
+   
+ 
