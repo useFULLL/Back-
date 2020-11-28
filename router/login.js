@@ -18,29 +18,30 @@ router.post('/', function(req, res, next) {
     var sql = 'SELECT * from user WHERE userID = ? AND userPW = ?';
     if(body.email==""||body.password==""){
         res.send('<script>alert("입력하지 않은 정보가 있습니다."); history.back();</script>');
-    }
-    var params = [body.email,body.password];
-    if(body.isAdmin){
-        sql = 'SELECT * from admin WHERE adminID = ? AND adminPW = ?';
-    }
-    conn.query(sql,params,function(err, result){
-        if(err){
-            console.log('err: ' + err);
-        }else{
-            if(result.length == 0){
-                res.send('<script>alert("일치하는 정보가 없습니다."); history.back();</script>');
-            }else{
-                req.session.userID = body.email;
-                if(body.isAdmin){
-                    req.session.userName = result.adminName;
-                    req.session.type = 'admin';
-                }else{
-                    req.session.userName = result.userName;
-                }
-                res.redirect('/');
-            }
+    }else{
+        var params = [body.email,body.password];
+        if(body.isAdmin){
+            sql = 'SELECT * from admin WHERE adminID = ? AND adminPW = ?';
         }
-    });
+        conn.query(sql,params,function(err, result){
+            if(err){
+                console.log('err: ' + err);
+            }else{
+                if(result.length == 0){
+                    res.send('<script>alert("일치하는 정보가 없습니다."); history.back();</script>');
+                }else{
+                    req.session.userID = body.email;
+                    if(body.isAdmin){
+                        req.session.userName = result.adminName;
+                        req.session.type = 'admin';
+                    }else{
+                        req.session.userName = result.userName;
+                    }
+                    res.redirect('/');
+                }
+            }
+        });
+    }
 });
 
 module.exports = router;
