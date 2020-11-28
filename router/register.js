@@ -16,25 +16,29 @@ router.post('/', function(req, res, next) {
     var body = req.body;
     var sql = 'SELECT * from user WHERE userID = ?';
 
-    conn.query(sql,body.email,function(err, result){
-        if(err){
-            console.log('err: ' + err);
-        }else{
-            if(result.length != 0){
-                res.send('<script>alert("이미 존재하는 아이디입니다."); history.back();</script>');
+    if(body.username==""||body.email==""||body.password==""){
+        res.send('<script>alert("입력하지 않은 정보가 있습니다."); history.back();</script>');
+    }else{
+        conn.query(sql,body.email,function(err, result){
+            if(err){
+                console.log('err: ' + err);
             }else{
-                var insertSql = 'INSERT INTO user VALUES(?,?,?)';
-                var params = [body.email,body.password,body.username];
-                conn.query(insertSql, params, function(err){
-                    if(err){
-                        console.log('err: ' + err);
-                    }else{
-                        res.redirect('/');
-                    }
-                });
+                if(result.length != 0){
+                    res.send('<script>alert("이미 존재하는 아이디입니다."); history.back();</script>');
+                }else{
+                    var insertSql = 'INSERT INTO user VALUES(?,?,?)';
+                    var params = [body.email,body.password,body.username];
+                    conn.query(insertSql, params, function(err){
+                        if(err){
+                            console.log('err: ' + err);
+                        }else{
+                            res.redirect('/');
+                        }
+                    });
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 module.exports = router;

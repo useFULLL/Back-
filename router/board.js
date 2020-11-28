@@ -53,28 +53,30 @@ router.post('/create', function(req, res, next) {
 
     if(title==""||description==""){
         res.send('<script>alert("미입력된 내용이 있습니다."); location.href="/"</script>');
-    }
-
-    conn.query('select max(boardID) as Max from board',function(err, result){
-        if(err){
-            console.log('err: ' + err);
-        }else{
-            if(result){
-                max=(result[0].Max)*1;
+    }else if(req.session.type){
+        res.send('<script>alert("관리자는 글을 작성할 수 없습니다."); location.href="/"</script>');
+    }else{
+        conn.query('select max(boardID) as Max from board',function(err, result){
+            if(err){
+                console.log('err: ' + err);
             }else{
-                max = 0;
-            }
-            param = [max+1,userID,title,description];
-        
-            conn.query(sql,param,function(err, result){
-                if(err){
-                    console.log('err: ' + err);
+                if(result){
+                    max=(result[0].Max)*1;
                 }else{
-                    res.redirect('/board');
+                    max = 0;
                 }
-            });
-        }
-    });
+                param = [max+1,userID,title,description];
+            
+                conn.query(sql,param,function(err, result){
+                    if(err){
+                        console.log('err: ' + err);
+                    }else{
+                        res.redirect('/board');
+                    }
+                });
+            }
+        });
+    }
 });
 
 //글 삭제
