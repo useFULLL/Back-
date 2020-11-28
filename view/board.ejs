@@ -63,10 +63,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h3 class="title-5 m-b-35">게시판</h3>
+                            <%if (!admin) {%>
                                 <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                     <a href="/board/create">
                                 <i class="zmdi zmdi-plus"></i>글쓰기</a></button>
                             </a>
+                            <%}%>
                         </div>
                     </div>
          
