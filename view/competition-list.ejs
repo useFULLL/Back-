@@ -65,7 +65,7 @@
                                                             <td><a href='/invest/<%=competitionData[i].competitionID%>/result'><button  class="au-btn2 au-btn2--red">대회종료됨</button></a></td>
                                                         <%}%>
                                                     <%}else{
-                                                        if(competitionData[i].joined==1){
+                                                        if(competitionData[i].joined==0){
                                                             if(competitionData[i].status ==0){%>
                                                                 <td><a href='/invest/<%=competitionData[i].competitionID%>/join'><button class="au-btn2 au-btn2--blue">대회모집</button></a></td>
                                                             <%}else if(competitionData[i].status ==1){%>
@@ -73,7 +73,7 @@
                                                             <%}else{%>
                                                                 <td><a href='/invest/<%=competitionData[i].competitionID%>/result'><button  class="au-btn2 au-btn2--red">대회종료</button></a></td>
                                                             <%}%>
-                                                        <%}else if(userID!=undefined){
+                                                        <%}else if(userID){
                                                             if(competitionData[i].status ==0){%>
                                                                 <td><a href='#'><button class="au-btn2 au-btn2--white">신청완료</button></a></td>
                                                             <%}else if(competitionData[i].status ==1){%>
