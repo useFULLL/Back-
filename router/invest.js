@@ -49,7 +49,7 @@ router.post('/create', function(req, res, next) {
         if(givenMoney*1<1000000){
             res.send('<script>alert("돈을 백만원 이상으로 설정해주세요."); history.back();</script>');
         }else if(startDate>=endDate){
-            res.send('<script>alert("대회 시작날짜가 종료날짜가 늦습니다."); history.back();</script>');
+            res.send('<script>alert("대회 시작날짜가 종료날짜보다 늦습니다."); history.back();</script>');
         }else{
             conn.query('select max(competitionID) as Max from competition',function(err, result){
                 if(err){
@@ -90,7 +90,7 @@ router.get('/:id', function(req, res, next) {
                 if(competitionResult[0].status==2){
                     res.send('<script>alert("이미 종료된 대회입니다."); location.href="/"</script>');
                 }else{
-                    conn.query('select * from user_competition_stock where userID=?',req.session.userID,function(err, stockResult){
+                    conn.query('select * from user_competition_stock where userID=? and competitionID=?',[req.session.userID, competitionID],function(err, stockResult){
                         if(err){
                             console.log('err: ' + err);
                         }else{
@@ -186,68 +186,83 @@ router.post('/:id/buy', function(req, res, next) {
     var stockName = body.stockName;
     var amount = body.amount*1;
     var price = body.price*1;
+    var flag=false;
 
-    conn.query('select total from user_competition where competitionID=? and userID=?',[competitionID,userID],function(err, result){
+    conn.query('select date_format(now(),\'%H:%i:%s\') as time',function(err, result){
         if(err){
             console.log('err: ' + err);
         }else{
-            var total = result[0].total*1;
-            if(total>=amount*price){
-                conn.query('select stockName from user_competition_stock where stockName=?',stockName,function(err, result){
-                    if(err){
-                        console.log('err: ' + err);
-                    }else{
-                        //원래 가지고 있는 주식
-                        if(result[0]){
-                            conn.query('update user_competition_stock set stockPrice=stockPrice+?,amount=amount+? where stockName=?',[amount*price,amount,result[0].stockName],function(err, result){
-                                if(err){
-                                    console.log('err: ' + err);
-                                }else{
-                                    conn.query('update user_competition set total=total-? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
-                                        if(err){
-                                            console.log('err: ' + err);
-                                        }else{
-                                            res.send('<script>alert("매수완료"); history.back();</script>');
-                                        }
-                                    });
-                                }
-                            });
-                        }else{
-                            //새로 산 주식
-                            var max;
-                            conn.query('select max(userstockID) as MAX from user_competition_stock',function(err, result){
-                                if(err){
-                                    console.log('err: ' + err);
-                                }else{
-                                    if(result[0].MAX){
-                                        max=result[0].MAX*1;
-                                    }else{
-                                        max=0;
-                                    }
-                                    var param=[max+1,amount*price,stockName,amount,competitionID,userID];
-                                    conn.query('insert into user_competition_stock values(?,?,?,?,?,?)',param,function(err, result){
-                                        if(err){
-                                            console.log('err: ' + err);
-                                        }else{
-                                            conn.query('update user_competition set total=total-? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
-                                                if(err){
-                                                    console.log('err: ' + err);
-                                                }else{
-                                                    res.send('<script>alert("매수완료"); history.back();</script>');
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    }
-                });
-            }else{
-                res.send('<script>alert("돈이 부족합니다."); history.back();</script>');
+            if(result[0]&&(result[0].time>="08:30:00" && result[0].time<="18:00:00")){
+                flag=true;
             }
         }
     });
+
+    if(flag){
+        conn.query('select total from user_competition where competitionID=? and userID=?',[competitionID,userID],function(err, result){
+            if(err){
+                console.log('err: ' + err);
+            }else{
+                var total = result[0].total*1;
+                if(total>=amount*price){
+                    conn.query('select stockName from user_competition_stock where stockName=?',stockName,function(err, result){
+                        if(err){
+                            console.log('err: ' + err);
+                        }else{
+                            //원래 가지고 있는 주식
+                            if(result[0]){
+                                conn.query('update user_competition_stock set stockPrice=stockPrice+?,amount=amount+? where stockName=?',[amount*price,amount,result[0].stockName],function(err, result){
+                                    if(err){
+                                        console.log('err: ' + err);
+                                    }else{
+                                        conn.query('update user_competition set total=total-? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
+                                            if(err){
+                                                console.log('err: ' + err);
+                                            }else{
+                                                res.send('<script>alert("매수완료"); history.back();</script>');
+                                            }
+                                        });
+                                    }
+                                });
+                            }else{
+                                //새로 산 주식
+                                var max;
+                                conn.query('select max(userstockID) as MAX from user_competition_stock',function(err, result){
+                                    if(err){
+                                        console.log('err: ' + err);
+                                    }else{
+                                        if(result[0].MAX){
+                                            max=result[0].MAX*1;
+                                        }else{
+                                            max=0;
+                                        }
+                                        var param=[max+1,amount*price,stockName,amount,competitionID,userID];
+                                        conn.query('insert into user_competition_stock values(?,?,?,?,?,?)',param,function(err, result){
+                                            if(err){
+                                                console.log('err: ' + err);
+                                            }else{
+                                                conn.query('update user_competition set total=total-? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
+                                                    if(err){
+                                                        console.log('err: ' + err);
+                                                    }else{
+                                                        res.send('<script>alert("매수완료"); history.back();</script>');
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }else{
+                    res.send('<script>alert("돈이 부족합니다."); history.back();</script>');
+                }
+            }
+        });
+    }else{
+        res.send('<script>alert("매수가 가능한 시간(08:30 ~ 18:00)이 아닙니다."); history.back();</script>');
+    }
 });
 
 //매도
@@ -258,47 +273,62 @@ router.post('/:id/sell', function(req, res, next) {
     var stockName = body.stockName;
     var amount = body.amount*1;
     var price = body.price*1;
+    var flag=false;
 
-    conn.query('select * from user_competition_stock where competitionID=? and userID=? and stockName=?',[competitionID,userID,stockName],function(err, result){
+    conn.query('select date_format(now(),\'%H:%i:%s\') as time',function(err, result){
         if(err){
             console.log('err: ' + err);
-        }else if(result[0]){
-            var haveAmount=result[0].amount*1;
-            if(haveAmount>amount){
-                conn.query('update user_competition_stock set amount=amount-?, stockPrice=stockPrice-? where competitionID=? and userID=? and stockName=?',[amount,amount*price,competitionID,userID,stockName],function(err, result){
-                    if(err){
-                        console.log('err: ' + err);
-                    }else{
-                        conn.query('update user_competition set total=total+? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
-                            if(err){
-                                console.log('err: ' + err);
-                            }else{
-                                res.send('<script>alert("매도완료"); history.back();</script>');
-                            }
-                        });
-                    }
-                });
-            }else if(haveAmount==amount){
-                conn.query('delete from user_competition_stock where competitionID=? and userID=? and stockName=?',[competitionID,userID,stockName],function(err, result){
-                    if(err){
-                        console.log('err: ' + err);
-                    }else{
-                        conn.query('update user_competition set total=total+? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
-                            if(err){
-                                console.log('err: ' + err);
-                            }else{
-                                res.send('<script>alert("매도완료"); history.back();</script>');
-                            }
-                        });
-                    }
-                });
-            }else{
-                res.send('<script>alert("현재 가지고 있는 개수보다 많이 팔 수 없습니다."); history.back();</script>');
-            }
         }else{
-            res.send('<script>alert("해당 주식을 가지고 있지 않습니다."); history.back();</script>');
+            if(result[0]&&(result[0].time>="08:30:00" && result[0].time<="18:00:00")){
+                flag=true;
+            }
         }
     });
+
+    if(flag){
+        conn.query('select * from user_competition_stock where competitionID=? and userID=? and stockName=?',[competitionID,userID,stockName],function(err, result){
+            if(err){
+                console.log('err: ' + err);
+            }else if(result[0]){
+                var haveAmount=result[0].amount*1;
+                if(haveAmount>amount){
+                    conn.query('update user_competition_stock set amount=amount-?, stockPrice=stockPrice-? where competitionID=? and userID=? and stockName=?',[amount,amount*price,competitionID,userID,stockName],function(err, result){
+                        if(err){
+                            console.log('err: ' + err);
+                        }else{
+                            conn.query('update user_competition set total=total+? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
+                                if(err){
+                                    console.log('err: ' + err);
+                                }else{
+                                    res.send('<script>alert("매도완료"); history.back();</script>');
+                                }
+                            });
+                        }
+                    });
+                }else if(haveAmount==amount){
+                    conn.query('delete from user_competition_stock where competitionID=? and userID=? and stockName=?',[competitionID,userID,stockName],function(err, result){
+                        if(err){
+                            console.log('err: ' + err);
+                        }else{
+                            conn.query('update user_competition set total=total+? where competitionID=? and userID=?',[amount*price,competitionID,userID],function(err, result){
+                                if(err){
+                                    console.log('err: ' + err);
+                                }else{
+                                    res.send('<script>alert("매도완료"); history.back();</script>');
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    res.send('<script>alert("현재 가지고 있는 개수보다 많이 팔 수 없습니다."); history.back();</script>');
+                }
+            }else{
+                res.send('<script>alert("해당 주식을 가지고 있지 않습니다."); history.back();</script>');
+            }
+        });
+    }else{
+        res.send('<script>alert("매도가 가능한 시간(08:30 ~ 18:00)이 아닙니다."); history.back();</script>');
+    }
 });
 
 module.exports = router;
