@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
             }
         });
     }else{
-        conn.query('select *,0 as joined from competition',function(err, result){
+        conn.query('select competitionID,status,givenMoney,adminID,0 as joined, date_format(startDate,\'%Y-%m-%d\') as startDate, date_format(endDate,\'%Y-%m-%d\') as endDate from competition',function(err, result){
             if(err){
                 console.log('err: ' + err);
             }else{
@@ -45,27 +45,33 @@ router.post('/create', function(req, res, next) {
         var startDate = body.startdate;
         var endDate = body.enddate;
         var givenMoney = body.givenmoney;
-    
-        conn.query('select max(competitionID) as Max from competition',function(err, result){
-            if(err){
-                console.log('err: ' + err);
-            }else{
-                if(result){
-                    max=(result[0].Max)*1;
+        
+        if(givenMoney*1<1000000){
+            res.send('<script>alert("돈을 백만원 이상으로 설정해주세요."); history.back();</script>');
+        }else if(startDate>=endDate){
+            res.send('<script>alert("대회 시작날짜가 종료날짜가 늦습니다."); history.back();</script>');
+        }else{
+            conn.query('select max(competitionID) as Max from competition',function(err, result){
+                if(err){
+                    console.log('err: ' + err);
                 }else{
-                    max = 0;
-                }
-                param = [max+1,startDate,endDate,givenMoney,userID];
-            
-                conn.query('insert into competition values(?,?,?,0,?,?)',param,function(err, result){
-                    if(err){
-                        console.log('err: ' + err);
+                    if(result){
+                        max=(result[0].Max)*1;
                     }else{
-                        res.redirect('/invest');
+                        max = 0;
                     }
-                });
-            }
-        });
+                    param = [max+1,startDate,endDate,givenMoney,userID];
+                
+                    conn.query('insert into competition values(?,?,?,0,?,?)',param,function(err, result){
+                        if(err){
+                            console.log('err: ' + err);
+                        }else{
+                            res.redirect('/invest');
+                        }
+                    });
+                }
+            });
+        }
     }
 });
 
