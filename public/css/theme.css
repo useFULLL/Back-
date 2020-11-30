@@ -212,7 +212,7 @@ strong {
     font-size: 15px;
     font-weight: 500;
     color: white;
-    background-color: #4272d7;
+    background-color:#19224A;
     width: max-content;
     padding: 10px;
     float: right;
@@ -526,6 +526,13 @@ section {
     background: rgb(161, 50, 7);
 }
 
+.au-btn2--yellow{
+    background: rgb(238, 217, 24);
+}
+.au-btn2--yellow:hover {
+    background: rgb(238, 217, 24);
+}
+
 .au-btn {
     line-height: 45px;
     padding: 0 35px;
@@ -576,11 +583,19 @@ section {
     background: #59bd60;
 }
 
-.au-btn--gary{
-    background: #868e96;
+.au-btn--purple {
+    background: #19224A;
 }
-.au-btn--gary:hover {
-    background: #868e96;
+
+.au-btn--purple:hover {
+    background: #19224A;
+}
+
+.au-btn--white{
+    background:#19224A ;
+}
+.au-btn--white:hover {
+    background:#19224A ;
 }
 
 .au-btn--red{
@@ -931,12 +946,12 @@ section {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    background: #4272d7;
+    background: #19224A;
     margin-left: -3px;
 }
 
 .au-btn--submit:hover {
-    background: #3868cd;
+    background:  #19224A;
 }
 
 .au-btn--submit > i {
@@ -2236,7 +2251,7 @@ section {
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background: #365cad;
+    background: #19224A;
     padding: 0 35px;
 }
 
@@ -2288,7 +2303,7 @@ section {
     font-size: 20px;
     margin-top: 20px;
     margin-bottom: 5px;
-    color: cornflowerblue;
+    color: black;
 }
 
 .account2 > a {
@@ -2342,7 +2357,7 @@ section {
 }
 
 .navbar-sidebar2 .navbar__list li:hover > a {
-    color: #4272d7;
+    color: #5a3e9e;
 }
 
 .navbar-sidebar2 .navbar__list li a {
@@ -2358,7 +2373,7 @@ section {
 }
 
 .navbar-sidebar2 .navbar__list li.active > a {
-    color: #4272d7;
+    color: #5a3e9e;
 }
 
 .navbar-sidebar2 .navbar__sub-list {
@@ -4335,7 +4350,7 @@ section {
 }
 
 .table-earning thead th {
-    background: #365cad;
+    background: #19224A;
     font-size: 13px;
     color: #fff;
     vertical-align: middle;
@@ -4588,7 +4603,7 @@ section {
 }
 
 .table-data2.table thead {
-    background: #4272d7;
+    background: #19224A;
 }
 
 .table-data2.table thead th {
@@ -4787,7 +4802,7 @@ section {
 }
 
 .table-data3 thead {
-    background: #4272d7;
+    background:#19224A;
 }
 
 .table-data3 thead tr th {
@@ -4812,7 +4827,7 @@ section {
     border-top-right-radius: 3px;
 }
 
-. thead tr th:last-child {
+.thead tr th:last-child {
     text-align: right;
     padding-right: 50px;
 }
