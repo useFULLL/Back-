@@ -95,7 +95,7 @@ db_config.connect(conn);
 cron.schedule("*/1 * * * * *",async()=>{
   //0 시작 전, 1 진행 중, 2 종료
   //date_format(B.postDate,\'%Y-%m-%d\')
-  conn.query("select competitionID, date_format(startDate,\'%Y-%m-%d\') as startDate, date_format(endDate,\'%Y-%m-%d\') as endDate, date_format(now(),\'%Y-%m-%d %h:%i:%s\') as now from competition where status=0",function(err, result){
+  conn.query("select competitionID, date_format(startDate,\'%Y-%m-%d\') as startDate, date_format(endDate,\'%Y-%m-%d\') as endDate, date_format(now(),\'%Y-%m-%d %H:%i:%s\') as now from competition where status=0",function(err, result){
     if(err){
         console.log('err: ' + err);
     }else{
@@ -116,7 +116,7 @@ cron.schedule("*/1 * * * * *",async()=>{
     }
   });
   
-  conn.query("select competitionID, date_format(startDate,\'%Y-%m-%d\') as startDate, date_format(endDate,\'%Y-%m-%d\') as endDate, date_format(now(),\'%Y-%m-%d %h:%i:%s\') as now from competition where status=1",function(err, result){
+  conn.query("select competitionID, date_format(startDate,\'%Y-%m-%d\') as startDate, date_format(endDate,\'%Y-%m-%d\') as endDate, date_format(now(),\'%Y-%m-%d %H:%i:%s\') as now from competition where status=1",function(err, result){
     if(err){
         console.log('err: ' + err);
     }else{
