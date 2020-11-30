@@ -198,13 +198,13 @@ router.post('/:id/buy', function(req, res, next) {
                     }else{
                         var total = result[0].total*1;
                         if(total>=amount*price){
-                            conn.query('select stockName from user_competition_stock where stockName=?',stockName,function(err, result){
+                            conn.query('select stockName from user_competition_stock where userID=? and competitionID=? and stockName=?',[userID,competitionID,stockName],function(err, result){
                                 if(err){
                                     console.log('err: ' + err);
                                 }else{
                                     //원래 가지고 있는 주식
                                     if(result[0]){
-                                        conn.query('update user_competition_stock set stockPrice=stockPrice+?,amount=amount+? where stockName=?',[amount*price,amount,result[0].stockName],function(err, result){
+                                        conn.query('update user_competition_stock set stockPrice=stockPrice+?,amount=amount+? where userID=? and competitionID=? and stockName=?',[amount*price,amount,userID,competitionID,result[0].stockName],function(err, result){
                                             if(err){
                                                 console.log('err: ' + err);
                                             }else{
