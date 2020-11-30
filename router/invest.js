@@ -150,7 +150,7 @@ router.get('/:id/result', function(req, res, next) {
             if(result[0].status!=2){
                 res.send('<script>alert("종료되지 않은 대회입니다."); location.href="/"</script>');
             }else{
-                conn.query('select * from user_competition UC join user U on UC.userID=U.userID where competitionID=? order by UC.total',competitionID,function(err, rankResult){
+                conn.query('select * from user_competition UC join user U on UC.userID=U.userID where competitionID=? order by UC.total DESC',competitionID,function(err, rankResult){
                     if(err){
                         console.log('err: ' + err);
                     }else{
@@ -164,8 +164,6 @@ router.get('/:id/result', function(req, res, next) {
                                     if(err){
                                         console.log('err: ' + err);
                                     }else{
-                                        console.log("competitionData ="+competitionResult);
-                                        console.log("selfdata ="+selfResult);
                                         res.render('competition',{userID: req.session.userID,admin: req.session.type, competitionData:competitionResult, rankData: rankResult, selfData: selfResult});
                                     }
                                 });
