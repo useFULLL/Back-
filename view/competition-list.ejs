@@ -75,7 +75,7 @@
                                                             <%}%>
                                                         <%}else if(userID){
                                                             if(competitionData[i].status ==0){%>
-                                                                <td><a href='#'><button class="au-btn2 au-btn2--white">신청완료</button></a></td>
+                                                                <td><button class="au-btn2 au-btn2--yellow">신청완료</button></td>
                                                             <%}else if(competitionData[i].status ==1){%>
                                                                 <td><a href='/invest/<%=competitionData[i].competitionID%>'><button class="au-btn2 au-btn2--green">대회참여</button></a></td>
                                                             <%}else{%>
@@ -83,7 +83,7 @@
                                                             <%}%>
                                                         <%}else{
                                                             if(competitionData[i].status ==0){%>
-                                                                <td><button class="au-btn2 au-btn2--blue">신청불가</button></td>
+                                                                <td><button class="au-btn2 au-btn2--white">신청불가</button></td>
                                                             <%}else if(competitionData[i].status ==1){%>
                                                                 <td><button class="au-btn2 au-btn2--white">대회 중</button></td>
                                                             <%}else{%>
