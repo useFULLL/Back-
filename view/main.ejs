@@ -33,9 +33,35 @@
                         </form> -->
                         <div class="row">
                             <div class="col">
-                                
                                 <div class="col-sm-12">
-                                    <h2 class="title-1 m-b-25">검색 상위</h2>
+                                    <h2 class="title-1 m-b-25">수익률 상위펀드</h2>
+                                    <div class="table-responsive table--no-card m-b-40">
+                                        <table class="table table-borderless table-striped table-earning2" id="fund">
+                                            <thead>
+                                                <tr>
+                                                    <th>펀드명</th>
+                                                    <th>설정액</th>
+                                                    <th>1개월 수익률</th>
+                                                    <th>3개월 수익률</th>
+                                                    <th>6개월 수익률</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                             <% for(var i=0;i<5;i++){ %>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <%}%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div> 
+                                <div class="col-sm-12">
+                                    <h2 class="title-1 m-b-25">검색 상위 주식</h2>
                                     <div class="table-responsive table--no-card m-b-40">
                                         <table class="table table-borderless table-striped table-earning" id="topstock">
                                             <thead>
@@ -121,7 +147,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>   
+                                </div>
+                                  
                             </div>
                             
         
